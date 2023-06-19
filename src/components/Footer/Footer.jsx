@@ -21,7 +21,7 @@ const Footer = () => {
               placeholder="Enter your email"
               className="border-2 border-gray-300  rounded-md  placeholder:bg-transparent mr-4 w-64 p-2"
             />
-            <Button>Send</Button>
+            <Button buttonText="Send" />
           </div>
         </div>
         <div className="md:flex md:justify-center order-1 md:order-2">

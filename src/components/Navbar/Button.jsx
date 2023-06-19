@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Button = () => {
+const Button = ({ buttonText }) => {
   return (
-    <button className= "bg-orange text-textwhite font-[Albert-sans] py-2 px-6 rounded-md  hover:bg-orange duration-500">
-      Register
+    <button className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md hover:bg-orange duration-500">
+      {buttonText}
     </button>
   );
+};
+
+Button.propTypes = {
+  buttonText: PropTypes.string.isRequired,
 };
 
 export default Button;

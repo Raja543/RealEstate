@@ -73,7 +73,7 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="md:flex md:items-center hidden space-x-4">
-          <Button text="Register" />
+          <Button buttonText="Register" />
         </div>
       </nav>
       {menuOpen && (
@@ -104,7 +104,7 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <Button text="Register" />
+            <Button buttonText="Register" />
           </li>
         </ul>
       )}
