@@ -9,15 +9,14 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white">
+    <header className="bg-[#FFFAE9]">
       <nav className="flex justify-between items-center mx-auto px-6 py-4 md:px-10">
         <div className="flex items-center">
           <img
-            className="w-8 cursor-pointer"
+            className="w-32 cursor-pointer"
             src="/images/logo.svg"
             alt="Logo"
           />
-          <h1 className="ml-2 text-xl font-bold">dwelling</h1>
         </div>
         <div className="md:hidden">
           <button
@@ -31,29 +30,44 @@ const Navbar = () => {
             )}
           </button>
         </div>
-        <ul className={`md:flex md:items-center hidden space-x-4`}>
+        <ul className={`md:flex md:items-center hidden space-x-3`}>
           <li>
-            <a className="text-gray-800 text-lg hover:text-gray-500 pr-2" href="#">
+            <a
+              className="text-gray-800 text-lg hover:text-gray-500 pr-2"
+              href="#"
+            >
               Home
             </a>
           </li>
           <li>
-            <a className="text-gray-800  text-lg hover:text-gray-500 pr-2" href="#">
+            <a
+              className="text-gray-800  text-lg hover:text-gray-500 pr-2"
+              href="#"
+            >
               About us
             </a>
           </li>
           <li>
-            <a className="text-gray-800 text-lg hover:text-gray-500 pr-2" href="#">
+            <a
+              className="text-gray-800 text-lg hover:text-gray-500 pr-2"
+              href="#"
+            >
               Renters
             </a>
           </li>
           <li>
-            <a className="text-gray-800 text-lg hover:text-gray-500 pr-2" href="#">
+            <a
+              className="text-gray-800 text-lg hover:text-gray-500 pr-2"
+              href="#"
+            >
               Homeowners
             </a>
           </li>
           <li>
-            <a className="text-gray-800 text-lg hover:text-gray-500 pr-2" href="#">
+            <a
+              className="text-gray-800 text-lg hover:text-gray-500 pr-2"
+              href="#"
+            >
               Reviews
             </a>
           </li>
