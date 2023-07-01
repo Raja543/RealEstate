@@ -14,22 +14,23 @@ const Navbar = () => {
         <div className="flex items-center">
           <img
             className="w-32 cursor-pointer"
-            src="/images/logo.svg"
+            src="/images/Logo.svg"
             alt="Logo"
           />
         </div>
         <div className="md:hidden">
-          <button
-            onClick={toggleMenu}
-            className="p-2 rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200"
-          >
-            {menuOpen ? (
-              <i className="fas fa-times "></i>
-            ) : (
-              <i className="fas fa-bars "></i>
-            )}
-          </button>
-        </div>
+  <button
+    onClick={toggleMenu}
+    className="p-2 rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200"
+  >
+    {menuOpen ? (
+      <i className="fas fa-times"/>
+    ) : (
+      <i className="fas fa-bars"/>
+    )}
+  </button>
+</div>
+
         <ul className={`md:flex md:items-center hidden space-x-3`}>
           <li>
             <a
@@ -77,7 +78,7 @@ const Navbar = () => {
         </div>
       </nav>
       {menuOpen && (
-        <ul className="md:hidden space-y-4 py-4 px-4 absolute top-16 left-0 w-full bg-white z-10 transition-all duration-300 ease-in-out">
+        <ul className="md:hidden space-y-4 py-4 px-4 w-full bg-[#FFFAE9] z-10 transition-all duration-300 ease-in-out">
           <li>
             <a className="block text-gray-800 hover:text-gray-500" href="#">
               Home
