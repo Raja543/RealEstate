@@ -3,7 +3,7 @@ import Button from "../Navbar/Button";
 
 const Footer = () => {
   return (
-    <div className="bg-[#FFFAE9] p-6 md:p-10">
+    <div className="bg-[#FFFAE9] p-2 md:p-10">
       <div className=" flex flex-col md:flex-row md:justify-between">
         <div className="flex-col justify-center items-center px-4 md:px-0 order-4 md:order-1">
           <img

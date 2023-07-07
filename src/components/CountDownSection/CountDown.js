@@ -3,10 +3,10 @@ import React from "react";
 const CountDown = () => {
   return (
     <div className="bg-[#6637EE] md:p-12">
-      <h1 className="text-[#FFFFFF] text-2xl p-4 md:text-center md:text-5xl">
+      <h1 className="text-[#FFFFFF] font-bold text-2xl p-4 md:text-center md:text-5xl">
         Trusted by the people across the globe
       </h1>
-      <p className="text-[#FFFF] text-lg px-4 pt-2 opacity-80  md:text-md md:max-w-6xl md:m-auto">
+      <p className="text-[#FFFF] text-base px-4 pt-2 opacity-80  md:text-md md:max-w-6xl md:m-auto">
         Building a next-generation collaborative platform to connect renters,
         homeowners, and agents. Live the way you want. Beautiful homes.
         Incredible locations. Pricing that makes sense.No matter what stage of

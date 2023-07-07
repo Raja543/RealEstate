@@ -7,6 +7,7 @@ import CountDown from "./components/CountDownSection/CountDown";
 import About from "./components/AboutSection/About";
 // import Property from "./components/PropertySection/Property";
 import CtaSection from "./components/CtaSection/CtaSection";
+import Testimonial from "./components/TestimonialSection/Testimonial";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <About />
       {/* <Property /> */}
       <CtaSection />
+      <Testimonial />
       <Footer />
     </div>
   );
