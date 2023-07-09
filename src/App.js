@@ -8,6 +8,8 @@ import About from "./components/AboutSection/About";
 // import Property from "./components/PropertySection/Property";
 import CtaSection from "./components/CtaSection/CtaSection";
 import Testimonial from "./components/TestimonialSection/Testimonial";
+import Contact from "./components/Contact/Contact";
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       <CtaSection />
       <Testimonial />
       <Footer />
+      <Contact/>
     </div>
   );
 }

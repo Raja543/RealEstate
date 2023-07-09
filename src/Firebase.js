@@ -1,15 +1,20 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCSy76QJEq3kCD_dueWNHyVqttbWzUUeQk",
-  authDomain: "real-estate-27033.firebaseapp.com",
-  projectId: "real-estate-27033",
-  storageBucket: "real-estate-27033.appspot.com",
-  messagingSenderId: "287502784251",
-  appId: "1:287502784251:web:7f10ea40e3d1168b9e425e"
+  apiKey: "AIzaSyDUnqAudEZCiiEeKr0wLlFhOOwD1RaqtCI",
+  authDomain: "real-estate-f5d9c.firebaseapp.com",
+  projectId: "real-estate-f5d9c",
+  storageBucket: "real-estate-f5d9c.appspot.com",
+  messagingSenderId: "784322307430",
+  appId: "1:784322307430:web:7a90f6b443c199ec0254a7",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+export { db };
+
+
