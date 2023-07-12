@@ -1,29 +1,25 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
-import Hero from "./components/HeroSection/Hero";
-import CountDown from "./components/CountDownSection/CountDown";
-import About from "./components/AboutSection/About";
-// import Property from "./components/PropertySection/Property";
-import CtaSection from "./components/CtaSection/CtaSection";
-import Testimonial from "./components/TestimonialSection/Testimonial";
-import Contact from "./components/Contact/Contact";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import ContactHome from "./ContactHome";
+import Login from "./components/Login/Login";
+import Signin from "./components/Login/Signin";
+import Signup from "./components/Login/Signup";
 
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Hero />
-      <CountDown />
-      <About />
-      {/* <Property /> */}
-      <CtaSection />
-      <Testimonial />
-      <Footer />
-      <Contact/>
-    </div>
+ <>
+    <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<ContactHome/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signin" element={<Signin/>} />
+        <Route path="/signup" element={<Signup/>} />
+      </Routes>
+ </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,62 +20,49 @@ const Navbar = () => {
           />
         </div>
         <div className="md:hidden">
-  <button
-    onClick={toggleMenu}
-    className="p-2 rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200"
-  >
-    {menuOpen ? (
-      <i className="fas fa-times"/>
-    ) : (
-      <i className="fas fa-bars"/>
-    )}
-  </button>
-</div>
+          <button
+            onClick={toggleMenu}
+            className="p-2 rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200"
+          >
+            {menuOpen ? (
+              <i className="fas fa-times" />
+            ) : (
+              <i className="fas fa-bars" />
+            )}
+          </button>
+        </div>
 
         <ul className={`md:flex md:items-center hidden space-x-3`}>
-          <li>
-            <a
-              className="text-gray-800 text-lg hover:text-gray-500 pr-2"
-              href="#"
-            >
+          <NavLink to="/">
+            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
               Home
-            </a>
-          </li>
-          <li>
-            <a
-              className="text-gray-800  text-lg hover:text-gray-500 pr-2"
-              href="#"
-            >
-              About us
-            </a>
-          </li>
-          <li>
-            <a
-              className="text-gray-800 text-lg hover:text-gray-500 pr-2"
-              href="#"
-            >
+            </li>
+          </NavLink>
+          <NavLink to="/about">
+            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
+              About Us
+            </li>
+          </NavLink>
+          <NavLink to="/register">
+            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
               Renters
-            </a>
-          </li>
-          <li>
-            <a
-              className="text-gray-800 text-lg hover:text-gray-500 pr-2"
-              href="#"
-            >
-              Homeowners
-            </a>
-          </li>
-          <li>
-            <a
-              className="text-gray-800 text-lg hover:text-gray-500 pr-2"
-              href="#"
-            >
-              Reviews
-            </a>
-          </li>
+            </li>
+          </NavLink>
+          <NavLink to="/register">
+            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
+              homeowners
+            </li>
+          </NavLink>
+          <NavLink to="/register">
+            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
+              Agents
+            </li>
+          </NavLink>
         </ul>
         <div className="md:flex md:items-center hidden space-x-4">
-          <Button buttonText="Register" />
+          <NavLink to="/login">
+            <Button buttonText="Login" />
+          </NavLink>
         </div>
       </nav>
       {menuOpen && (

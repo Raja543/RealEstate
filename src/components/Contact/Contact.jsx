@@ -17,6 +17,7 @@ const Contact = () => {
     mobile: "",
     email: "",
     subject: "",
+    description: "",
   });
 
   useEffect(() => {
@@ -47,28 +48,27 @@ const Contact = () => {
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
-
-  function sendEmail() {
-    emailjs
-      .send(
-        "service_8bqc0u8",
-        "template_7mwgjrf",
-        {
-          form_name: name,
-          form_email: email,
-          form_subject: subject,
-          form_message: description,
-          form_phone: mobile,
-        },
-        "WxG2eBWo77ylYjTM4"
-      )
-      .then(() => {
-        console.log("Email sent");
-      })
-      .catch((e) => {
-        console.error("Error while sending email", e);
-      });
-  }
+ function sendEmail() {
+      emailjs
+        .send(
+          "service_8bqc0u8",
+          "template_7mwgjrf",
+          {
+            form_name: name,
+            form_email: email,
+            form_subject: subject,
+            form_message: description,
+            form_phone: mobile,
+          },
+          "WxG2eBWo77ylYjTM4"
+        )
+        .then(() => {
+          console.log("Email sent");
+        })
+        .catch((e) => {
+          console.error("Error while sending email", e);
+        });
+    }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,8 +85,18 @@ const Contact = () => {
       hasError = true;
     }
 
+    if (email.trim() === "") {
+      updatedErrors.email = "Email is required";
+      hasError = true;
+    }
+
     if (subject.trim() === "") {
       updatedErrors.subject = "Subject is required";
+      hasError = true;
+    }
+
+    if (description.trim() === "") {
+      updatedErrors.description = "Description is required";
       hasError = true;
     }
 
@@ -118,6 +128,7 @@ const Contact = () => {
       sendEmail();
 
       console.log("Document written with ID: ", docRef.id);
+
       setName("");
       setMobile("");
       setEmail("");
@@ -131,102 +142,109 @@ const Contact = () => {
       <h1 className="text-4xl font-bold text-center mt-10">Contact Us</h1>
       <div className="flex justify-center mt-10">
         <div className="w-8/12 p-6 bg-gray-200 rounded border border-gray-300">
-          <div className="flex flex-wrap mb-8">
-            <div className="w-full md:w-1/2">
-              <label htmlFor="name" className="block mb-2">
-                Name<span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Enter Your Name"
-                value={name}
-                onChange={handleNameChange}
-                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-              />
-              {errors.name && (
-                <span className="text-red-500">{errors.name}</span>
-              )}
-            </div>
-            <div className="w-full md:w-1/2">
-              <label htmlFor="mobile" className="block mb-2">
-                Mobile Number<span className="text-red-500">*</span>
-              </label>
-              <div className="flex">
+          <form onSubmit={handleSubmit}>
+            <div className="flex flex-wrap mb-8">
+              <div className="w-full md:w-1/2">
+                <label htmlFor="name" className="block mb-2">
+                  Name
+                </label>
                 <input
-                  id="countryPin"
-                  className="w-1/5 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-                  value="+ 91"
-                  readOnly
+                  type="text"
+                  id="name"
+                  placeholder="Enter Your Name"
+                  value={name}
+                  onChange={handleNameChange}
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
                 />
-                <input
-                  type="number"
-                  id="mobileNumber"
-                  className="w-4/5 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-                  placeholder="Enter mobile number"
-                  value={mobile}
-                  onChange={handleMobileChange}
-                />
+                {errors.name && (
+                  <span className="text-orange">{errors.name}</span>
+                )}
               </div>
-              {errors.mobile && (
-                <span className="text-red-500">{errors.mobile}</span>
+              <div className="w-full md:w-1/2">
+                <label htmlFor="mobile" className="block mb-2">
+                  Mobile Number
+                </label>
+                <div className="flex">
+                  <input
+                    id="countryPin"
+                    className="w-1/5 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
+                    value="+ 91"
+                    readOnly
+                  />
+                  <input
+                    type="number"
+                    id="mobileNumber"
+                    className="w-4/5 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
+                    placeholder="Enter mobile number"
+                    value={mobile}
+                    onChange={handleMobileChange}
+                  />
+                </div>
+                {errors.mobile && (
+                  <span className="text-orange">{errors.mobile}</span>
+                )}
+              </div>
+            </div>
+            <div className="flex flex-wrap mb-8">
+              <div className="w-full md:w-1/2">
+                <label htmlFor="email" className="block mb-2">
+                  Email ID
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter your Email ID "
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
+                />
+                 {errors.email && (
+                  <span className="text-orange">{errors.email}</span>
+                )}
+              </div>
+              <div className="w-full md:w-1/2">
+                <label htmlFor="subject" className="block mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  autoComplete="off"
+                  placeholder="Enter subject"
+                  value={subject}
+                  onChange={handleSubjectChange}
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
+                />
+                {errors.subject && (
+                  <span className="text-orange">{errors.subject}</span>
+                )}
+              </div>
+            </div>
+            <div className="mb-8">
+              <label htmlFor="description" className="block mb-2">
+                Describe your requirements :
+              </label>
+              <textarea
+                id="description"
+                rows="5"
+                placeholder="Describe your requirement"
+                value={description}
+                onChange={handleDescriptionChange}
+                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500 resize-none"
+              ></textarea>
+              {errors.description && (
+                <span className="text-orange">{errors.description}</span>
               )}
             </div>
-          </div>
-          <div className="flex flex-wrap mb-8">
-            <div className="w-full md:w-1/2">
-              <label htmlFor="email" className="block mb-2">
-                Email ID
-              </label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter your Email ID (Optional)"
-                value={email}
-                onChange={handleEmailChange}
-                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-              />
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="bg-orange py-2 px-6 text-white rounded-md duration-500"
+              >
+                Submit
+              </button>
             </div>
-            <div className="w-full md:w-1/2">
-              <label htmlFor="subject" className="block mb-2">
-                Subject<span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="subject"
-                autoComplete="off"
-                placeholder="Enter subject"
-                value={subject}
-                onChange={handleSubjectChange}
-                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-              />
-              {errors.subject && (
-                <span className="text-red-500">{errors.subject}</span>
-              )}
-            </div>
-          </div>
-          <div className="mb-8">
-            <label htmlFor="description" className="block mb-2">
-              Describe your requirements (optional):
-            </label>
-            <textarea
-              id="description"
-              rows="5"
-              placeholder="Describe your requirement"
-              value={description}
-              onChange={handleDescriptionChange}
-              className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-            ></textarea>
-          </div>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="bg-orange py-2 px-6 text-white rounded-md duration-500"
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
-          </div>
+          </form>
         </div>
       </div>
     </>

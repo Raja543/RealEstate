@@ -1,17 +1,18 @@
 import React from "react";
 import Button from "../Navbar/Button";
+import { HashLink } from "react-router-hash-link";
 
 const Footer = () => {
   return (
     <div className="bg-[#FFFAE9] p-2 md:p-10">
       <div className=" flex flex-col md:flex-row md:justify-between">
-        <div className="flex-col justify-center items-center px-4 md:px-0 order-4 md:order-1">
+        <div className="flex-col justify-center space-y-3 items-center px-4 md:px-0 order-4 md:order-1">
           <img
             className="w-32 cursor-pointer "
             src="/images/Logo.svg"
             alt="Logo"
           />
-          <p className="text-[#666270] text-xl max-w-sm hover:text-gray-500  pt-3 pb-4 ">
+          <p className="text-[#666270] text-xl max-w-sm hover:text-gray-500  pt-3  ">
             Building a next-generation collaborative platform to connect
             renters, homeowners, and agents.
           </p>
@@ -25,151 +26,78 @@ const Footer = () => {
           </div>
         </div>
         <div className="md:flex md:justify-center order-1 md:order-2">
-          <ul className="flex flex-col space-y-3 px-4 pt-4 pb-2 ">
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
+          <ul className="flex flex-col  px-4 pt-4 pb-2 ">
+            <HashLink to="/">
+              <li className="text-[#000] font-extrabold text-xl  hover:text-gray-500  pt-3 ">
                 Dwelling
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
+              </li>
+            </HashLink>
+            <HashLink to="/">
+              <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
                 Find my home
-              </a>
+              </li>
+            </HashLink>
+            <HashLink to="/">
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Homeowners
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Homeowners
-              </a>
+            </HashLink>
+            <HashLink to="/">
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3">
+              Community
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Community
-              </a>
+            </HashLink>
+            <HashLink to="/">
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Review
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Review
-              </a>
-            </li>
+            </HashLink>
           </ul>
         </div>
 
         <div className="md:flex md:justify-center order-2 md:order-3">
-          <ul className="flex flex-col space-y-3 px-4 pt-4 pb-2">
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Company
-              </a>
+          <ul className="flex flex-col  px-4 pt-4 pb-2">
+          <HashLink to="/">
+            <li className="text-[#000] font-extrabold text-xl  hover:text-gray-500  pt-3 ">
+              Company
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Features
-              </a>
+            </HashLink>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Features
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Articles
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Articles
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Press
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Press
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Refer
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Refer
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Careers
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Careers
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Api documentation
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Api documentation
             </li>
           </ul>
         </div>
         <div className="md:flex md:justify-center order-3 md:order-4">
-          <ul className="flex flex-col space-y-3 px-4 pt-4 pb-2">
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Support
-              </a>
+          <ul className="flex flex-col  px-4 pt-4 pb-2">
+            <li className="text-[#000] font-extrabold text-xl  hover:text-gray-500  pt-3 ">
+              Support
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                contact
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              contact
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Privacy
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Privacy
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                Terms
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              Terms
             </li>
-            <li>
-              <a
-                href="#"
-                className="text-[#666270] text-xl  hover:text-gray-500  pt-3 pb-4"
-              >
-                FAQ
-              </a>
+            <li className="text-[#666270] text-xl  hover:text-gray-500  pt-3 ">
+              FAQ
             </li>
           </ul>
         </div>
@@ -188,12 +116,12 @@ const Footer = () => {
             className="w-8 mr-4 cursor-pointer"
           />
           <img
-            src="/images/ln.svg"
+            src="/images/twt.svg"
             alt="facebook"
             className="w-8 mr-4 cursor-pointer"
           />
         </div>
-        <h1 className="text-[#666270] text-xl  hover:text-gray-500  pt-4 pb-4">
+        <h1 className="text-[#000] font-extrabold text-xl  hover:text-gray-500  pt-4 ">
           Copyright @Raja 2023
         </h1>
       </div>
