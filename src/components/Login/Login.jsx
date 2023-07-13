@@ -17,8 +17,13 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email.trim() === "" || password.trim() === "") {
-      toast.error("Please enter your email and password");
+    if (email.trim() === "" ) {
+      toast.error("Please enter the valid email");
+      return;
+    }
+
+    if (password.trim() === "") {
+      toast.error("Please enter the valid password");
       return;
     }
     signInWithEmailAndPassword(auth, email, password)
@@ -29,11 +34,17 @@ const Login = () => {
         });
         navigate("/home");
       })
-      .catch(() => {
-        // FixMe: handle all error correctly
-        toast.error(
-          "Invalid credentials. Please enter valid email and password."
-        );
+      .catch((error) => {
+        if (error.code === 'auth/invalid-email') {
+          // Invalid email format
+          toast.error('Invalid email');
+        } else if (error.code === 'auth/wrong-password') {
+          // Wrong password
+          toast.error('Wrong password');
+        } else {
+          // Other error cases
+          toast.error('An error occurred. Please try again later.');
+        }
       });
   };
 
@@ -109,6 +120,7 @@ const Login = () => {
                   placeholder="Enter Your email address"
                   onChange={(e) => setEmail(e.target.value)}
                   autoFocus
+                  autoComplete="email"
                   className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />
               </div>
@@ -117,6 +129,7 @@ const Login = () => {
                   <label
                     htmlFor="password"
                     className="text-sm font-semibold text-gray-500"
+                   
                   >
                     Password
                   </label>
@@ -131,6 +144,7 @@ const Login = () => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
                   className="px-4 py-2 transition duration-300 border  rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />
               </div>

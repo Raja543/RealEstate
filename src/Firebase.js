@@ -7,6 +7,7 @@ const firebaseConfig = {
   authDomain: "real-estate-f5d9c.firebaseapp.com",
   projectId: "real-estate-f5d9c",
   storageBucket: "real-estate-f5d9c.appspot.com",
+  DatabaseURL: "https://real-estate-f5d9c-default-rtdb.asia-southeast1.firebasedatabase.app",
   messagingSenderId: "784322307430",
   appId: "1:784322307430:web:7a90f6b443c199ec0254a7",
 };

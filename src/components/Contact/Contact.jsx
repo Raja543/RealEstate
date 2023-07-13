@@ -4,6 +4,7 @@ import emailjs from "emailjs-com";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
   const query = new URLSearchParams(useLocation().search);
@@ -48,31 +49,33 @@ const Contact = () => {
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
- function sendEmail() {
-      emailjs
-        .send(
-          "service_8bqc0u8",
-          "template_7mwgjrf",
-          {
-            form_name: name,
-            form_email: email,
-            form_subject: subject,
-            form_message: description,
-            form_phone: mobile,
-          },
-          "WxG2eBWo77ylYjTM4"
-        )
-        .then(() => {
-          console.log("Email sent");
-        })
-        .catch((e) => {
-          console.error("Error while sending email", e);
-        });
-    }
+
+function sendEmail() {
+    emailjs
+      .send(
+        "service_8bqc0u8",
+        "template_7mwgjrf",
+        {
+          form_name: name,
+          form_email: email,
+          form_subject: subject,
+          form_message: description,
+          form_phone: mobile,
+        },
+        "WxG2eBWo77ylYjTM4"
+      )
+      .then(() => {
+        console.log("Email sent");
+      })
+      .catch((e) => {
+        console.error("Error while sending email", e);
+      });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let hasError = false;
+    console.log("form submitted");
     const updatedErrors = {};
 
     if (name.trim() === "") {
@@ -115,16 +118,9 @@ const Contact = () => {
         description: description,
         timestamp: timestamp,
       });
-      toast("🙏 Thank You, Our Team will contact soon.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+
+    
+
       sendEmail();
 
       console.log("Document written with ID: ", docRef.id);
@@ -134,6 +130,17 @@ const Contact = () => {
       setEmail("");
       setSubject("");
       setDescription("");
+      
+      toast.success("🙏 Thank You, Our Team will contact you soon.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -198,7 +205,7 @@ const Contact = () => {
                   onChange={handleEmailChange}
                   className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
                 />
-                 {errors.email && (
+                {errors.email && (
                   <span className="text-orange">{errors.email}</span>
                 )}
               </div>
@@ -240,6 +247,7 @@ const Contact = () => {
               <button
                 type="submit"
                 className="bg-orange py-2 px-6 text-white rounded-md duration-500"
+                onClick={handleSubmit}
               >
                 Submit
               </button>
