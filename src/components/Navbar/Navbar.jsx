@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,11 +13,13 @@ const Navbar = () => {
     <header className="bg-[#FFFAE9]">
       <nav className="flex justify-between items-center mx-auto px-6 py-4 md:px-10">
         <div className="flex items-center">
-          <img
-            className="w-32 cursor-pointer"
-            src="/images/Logo.svg"
-            alt="Logo"
-          />
+          <Link to="/">
+            <img
+              className="w-32 cursor-pointer"
+              src="/images/Logo.svg"
+              alt="Logo"
+            />
+          </Link>
         </div>
         <div className="md:hidden">
           <button
@@ -93,7 +95,9 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <Button buttonText="Register" />
+            <NavLink to="/login">
+              <Button buttonText="Login" />
+            </NavLink>
           </li>
         </ul>
       )}

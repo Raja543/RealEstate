@@ -7,7 +7,7 @@ import CountDown from "./components/CountDownSection/CountDown";
 import About from "./components/AboutSection/About";
 import CtaSection from "./components/CtaSection/CtaSection";
 import Testimonial from "./components/TestimonialSection/Testimonial";
-
+import VideoSection from "./components/VideoSection/VideoSection";
 
 function Home() {
   return (
@@ -16,8 +16,9 @@ function Home() {
       <Hero />
       <CountDown />
       <About />
-      <CtaSection />
+      <VideoSection />
       <Testimonial />
+      <CtaSection />
       <Footer />
     </div>
   );
