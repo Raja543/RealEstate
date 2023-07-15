@@ -25,7 +25,7 @@ const VideoSection = () => {
           <ReactPlayer
             ref={playerRef}
             url={"/videos/hs.mp4"}
-            controls={true}
+            controls={false}
             playing={true}
             className="react-player"
             width="100%"
