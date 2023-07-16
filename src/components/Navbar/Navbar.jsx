@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <header className="bg-[#FFFAE9]">
-      <nav className="flex justify-between items-center mx-auto px-6 py-4 md:px-10">
+      <nav className="flex justify-between items-center mx-auto px-6 py-4 md:px-6">
         <div className="flex items-center">
           <Link to="/">
             <img
@@ -36,28 +36,28 @@ const Navbar = () => {
 
         <ul className={`md:flex md:items-center hidden space-x-3`}>
           <NavLink to="/">
-            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
+            <li className="text-gray-800 text-lg hover:text-gray-500 pr-4">
               Home
             </li>
           </NavLink>
-          <NavLink to="/about">
-            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
-              About Us
+          <NavLink to="/property-search">
+            <li className="text-gray-800 text-lg hover:text-gray-500 pr-4">
+              Find Home 
             </li>
           </NavLink>
-          <NavLink to="/register">
+          <NavLink to="/Property-list">
             <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
-              Renters
+             List Property
             </li>
           </NavLink>
-          <NavLink to="/register">
-            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
-              homeowners
-            </li>
-          </NavLink>
-          <NavLink to="/register">
+          <NavLink to="/agents">
             <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
               Agents
+            </li>
+          </NavLink>
+          <NavLink to="/contact">
+            <li className="text-gray-800 text-lg hover:text-gray-500 pr-2">
+              Contact Us
             </li>
           </NavLink>
         </ul>

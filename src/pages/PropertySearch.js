@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, query, orderByChild, equalTo, get, push, set } from 'firebase/database';
-import Footer from './components/Footer/Footer';
-import Navbar from './components/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
+import Navbar from '../components/Navbar/Navbar';
 
 const PropertySearch = () => {
   const [location, setLocation] = useState('');

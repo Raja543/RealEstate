@@ -26,7 +26,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="md:flex md:justify-center order-1 md:order-2">
-          <ul className="flex flex-col  px-4 pt-4 pb-2 ">
+          <ul className="flex flex-col  px-2 pt-4 pb-2 ">
             <HashLink to="/">
               <li className="text-[#000] font-extrabold text-xl  hover:text-gray-500  pt-3 ">
                 Dwelling
@@ -56,7 +56,7 @@ const Footer = () => {
         </div>
 
         <div className="md:flex md:justify-center order-2 md:order-3">
-          <ul className="flex flex-col  px-4 pt-4 pb-2">
+          <ul className="flex flex-col  px-2 pt-4 pb-2">
           <HashLink to="/">
             <li className="text-[#000] font-extrabold text-xl  hover:text-gray-500  pt-3 ">
               Company
@@ -83,7 +83,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="md:flex md:justify-center order-3 md:order-4">
-          <ul className="flex flex-col  px-4 pt-4 pb-2">
+          <ul className="flex flex-col  px-2 pt-4 pb-2">
             <li className="text-[#000] font-extrabold text-xl  hover:text-gray-500  pt-3 ">
               Support
             </li>
