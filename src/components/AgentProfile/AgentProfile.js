@@ -39,7 +39,6 @@ const AgentProfile = ({ agentId }) => {
       <p className="mb-2">
         Phone: <span className="font-medium">{agent.phone}</span>
       </p>
-      {/* Additional agent data rendering */}
     </div>
   );
 };

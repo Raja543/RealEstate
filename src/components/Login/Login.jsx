@@ -17,7 +17,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email.trim() === "" ) {
+    if (email.trim() === "") {
       toast.error("Please enter the valid email");
       return;
     }
@@ -35,15 +35,15 @@ const Login = () => {
         navigate("/home");
       })
       .catch((error) => {
-        if (error.code === 'auth/invalid-email') {
+        if (error.code === "auth/invalid-email") {
           // Invalid email format
-          toast.error('Invalid email');
-        } else if (error.code === 'auth/wrong-password') {
+          toast.error("Invalid email");
+        } else if (error.code === "auth/wrong-password") {
           // Wrong password
-          toast.error('Wrong password');
+          toast.error("Wrong password");
         } else {
           // Other error cases
-          toast.error('An error occurred. Please try again later.');
+          toast.error("An error occurred. Please try again later.");
         }
       });
   };
@@ -56,10 +56,21 @@ const Login = () => {
         result.user.email;
         setUser(user);
         localStorage.setItem("email", user.email);
+        toast.success("Login successful", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 1000,
+        });
+        navigate("/home");
       })
       .catch((error) => {
-        console.log(error);
-      });
+      if (error.code === "auth/invalid-email") {
+        toast.error("Invalid email or password");
+      } else if (error.code === "auth/wrong-password") {
+        toast.error("Invalid email or password");
+      }else {
+        toast.error("An error occurred. Please try again later.");
+      }
+    });
   };
 
   useEffect(() => {
@@ -129,13 +140,10 @@ const Login = () => {
                   <label
                     htmlFor="password"
                     className="text-sm font-semibold text-gray-500"
-                   
                   >
                     Password
                   </label>
-                  <p
-                    className="text-sm hover:underline cursor-pointer"
-                  >
+                  <p className="text-sm hover:underline cursor-pointer">
                     Forgot Password?
                   </p>
                 </div>

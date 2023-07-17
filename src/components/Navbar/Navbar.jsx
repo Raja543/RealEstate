@@ -42,7 +42,7 @@ const Navbar = () => {
           </NavLink>
           <NavLink to="/property-search">
             <li className="text-gray-800 text-lg hover:text-gray-500 pr-4">
-              Find Home 
+              Find Property
             </li>
           </NavLink>
           <NavLink to="/Property-list">
