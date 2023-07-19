@@ -3,7 +3,7 @@ import Button from "../Navbar/Button";
 const Hero = () => {
   return (
     <div className="bg-[#FFFAE9] p-4">
-      <div className="flex flex-wrap justify-center md:mt-2 md:mb-2 md:mx-20 ">
+      <div className="flex flex-wrap justify-center md:mb-2 md:mx-20 ">
         <div className="w-1/4 sm:w-1/4 p-2">
           <img src="/images/1h.svg" alt="Image 1" className="w-full h-auto " />
         </div>
