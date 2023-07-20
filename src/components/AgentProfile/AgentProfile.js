@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../Firebase";
 import PropTypes from "prop-types";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const AgentProfile = ({ agentId }) => {
   const [agent, setAgent] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch agent data from Firebase based on the agentId
-    const fetchAgentData = async () => {
-      try {
-        const docRef = doc(db, "agents", agentId);
-        const docSnapshot = await getDoc(docRef);
-
-        if (docSnapshot.exists) {
-          setAgent(docSnapshot.data());
+    const fetchAgentData = () => {
+      const db = getDatabase();
+      const agentRef = ref(db, `agents/${agentId}`);
+      onValue(agentRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setAgent(data);
         } else {
           console.log("Agent not found.");
         }
-      } catch (error) {
-        console.error("Error fetching agent data:", error);
-      }
+        setLoading(false);
+      });
     };
 
     fetchAgentData();
   }, [agentId]);
 
-  if (!agent) {
+  if (loading) {
     return <div>Loading agent data...</div>;
+  }
+
+  if (!agent) {
+    return <div>Agent not found.</div>;
   }
 
   return (
