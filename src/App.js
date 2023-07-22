@@ -1,32 +1,34 @@
 import React from "react";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+import { AuthProvider } from "./AuthContext";
 import Home from "./pages/Home";
 import ContactHome from "./pages/ContactHome";
 import Login from "./components/Login/Login";
-import Signin from "./components/Login/Signin";
 import Signup from "./components/Login/Signup";
 import PropertySearch from "./pages/PropertySearch";
-import Agents from "./pages/Agent";
+import Agent from "./pages/Agent";
 import PropertyList from "./pages/PropertyList";
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/register" element={<ContactHome />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/property-search" element={<PropertySearch />} />
-        <Route path="/property-list" element={<PropertyList />} />
-        <Route path="/agents" element={<Agents />} />
-        <Route path="/contact" element={<ContactHome />} />
-      </Routes>
-    </>
+    <div className="App">
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+            <Route path="/findproperty" element={<PrivateRoute><PropertySearch /></PrivateRoute>} />
+            <Route path="/listproperty" element={<PrivateRoute><PropertyList /></PrivateRoute>} />
+            <Route path="/agents" element={<PrivateRoute><Agent /></PrivateRoute>} />
+            <Route path="/contacts" element={<PrivateRoute><ContactHome /></PrivateRoute>} />
+            <Route path="*" element={<PrivateRoute><Home /></PrivateRoute>} />
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 }
 

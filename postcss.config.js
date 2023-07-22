@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   plugins: {
     'postcss-import': {},
     'tailwindcss/nesting': 'postcss-nesting',
@@ -7,4 +7,4 @@ module.exports = {
       features: { 'nesting-rules': false },
     },
   }
-}
+};

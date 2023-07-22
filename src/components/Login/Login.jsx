@@ -7,45 +7,48 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, provider } from "../../Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
-import "firebase/auth";
+import { useAuth } from "../../AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (email.trim() === "") {
-      toast.error("Please enter the valid email");
+    const { email, password } = credentials;
+    if (!email.trim() || !password.trim()) {
       return;
     }
 
-    if (password.trim() === "") {
-      toast.error("Please enter the valid password");
-      return;
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      login(userCredentials.user);
+    } catch (error) {
+      if (error.code === "auth/invalid-email") {
+        toast.error("Invalid email");
+      } else if (error.code === "auth/wrong-password") {
+        toast.error("Wrong password");
+      } else {
+        toast.error("An error occurred. Please try again later.");
+      }
     }
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        toast.success("Login successful", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1000,
-        });
-        navigate("/home");
-      })
-      .catch((error) => {
-        if (error.code === "auth/invalid-email") {
-          // Invalid email format
-          toast.error("Invalid email");
-        } else if (error.code === "auth/wrong-password") {
-          // Wrong password
-          toast.error("Wrong password");
-        } else {
-          // Other error cases
-          toast.error("An error occurred. Please try again later.");
-        }
-      });
   };
 
   const [user, setUser] = useState(null);
@@ -63,14 +66,14 @@ const Login = () => {
         navigate("/home");
       })
       .catch((error) => {
-      if (error.code === "auth/invalid-email") {
-        toast.error("Invalid email or password");
-      } else if (error.code === "auth/wrong-password") {
-        toast.error("Invalid email or password");
-      }else {
-        toast.error("An error occurred. Please try again later.");
-      }
-    });
+        if (error.code === "auth/invalid-email") {
+          toast.error("Invalid email or password");
+        } else if (error.code === "auth/wrong-password") {
+          toast.error("Invalid email or password");
+        } else {
+          toast.error("An error occurred. Please try again later.");
+        }
+      });
   };
 
   useEffect(() => {
@@ -127,9 +130,9 @@ const Login = () => {
                 <input
                   type="email"
                   id="email"
-                  value={email}
                   placeholder="Enter Your email address"
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={credentials.email}
+                  onChange={handleChange}
                   autoFocus
                   autoComplete="email"
                   className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
@@ -150,8 +153,8 @@ const Login = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={credentials.password}
+                  onChange={handleChange}
                   autoComplete="current-password"
                   className="px-4 py-2 transition duration-300 border  rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />

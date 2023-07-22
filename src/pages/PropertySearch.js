@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { getDatabase, ref, query, orderByChild, equalTo, get, push, set } from 'firebase/database';
-import Footer from '../components/Footer/Footer';
-import Navbar from '../components/Navbar/Navbar';
+import React, { useState, useEffect } from "react";
+import {
+  getDatabase,
+  ref,
+  query,
+  orderByChild,
+  equalTo,
+  get,
+  push,
+  set,
+} from "firebase/database";
+import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Navbar/Navbar";
 
 const PropertySearch = () => {
-  const [location, setLocation] = useState('');
-  const [priceRange, setPriceRange] = useState('');
-  const [propertyType, setPropertyType] = useState('');
-  const [bedrooms, setBedrooms] = useState('');
+  const [location, setLocation] = useState("");
+  const [priceRange, setPriceRange] = useState("");
+  const [propertyType, setPropertyType] = useState("");
+  const [bedrooms, setBedrooms] = useState("");
   const [properties, setProperties] = useState([]);
 
   const handleSearch = async (e) => {
@@ -24,23 +33,30 @@ const PropertySearch = () => {
       const matchingProperties = await performPropertySearch(searchCriteria);
       setProperties(matchingProperties);
     } catch (error) {
-      console.log('Error performing search:', error);
+      console.log("Error performing search:", error);
     }
   };
 
   const performPropertySearch = async (searchCriteria) => {
     try {
       const db = getDatabase();
-      const propertiesRef = ref(db, 'properties');
-      const queryRef = query(propertiesRef, orderByChild('location'), equalTo(searchCriteria.location));
+      const propertiesRef = ref(db, "properties");
+      const queryRef = query(
+        propertiesRef,
+        orderByChild("location"),
+        equalTo(searchCriteria.location)
+      );
       const snapshot = await get(queryRef);
       const matchingProperties = [];
       snapshot.forEach((childSnapshot) => {
-        matchingProperties.push({ id: childSnapshot.key, ...childSnapshot.val() });
+        matchingProperties.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val(),
+        });
       });
       return matchingProperties;
     } catch (error) {
-      console.log('Error performing search:', error);
+      console.log("Error performing search:", error);
       return [];
     }
   };
@@ -48,7 +64,7 @@ const PropertySearch = () => {
   const storePropertyData = async () => {
     try {
       const db = getDatabase();
-      const propertiesRef = ref(db, 'properties');
+      const propertiesRef = ref(db, "properties");
       const newPropertyRef = push(propertiesRef);
       await set(newPropertyRef, {
         location,
@@ -57,14 +73,14 @@ const PropertySearch = () => {
         bedrooms,
       });
 
-      setLocation('');
-      setPriceRange('');
-      setPropertyType('');
-      setBedrooms('');
+      setLocation("");
+      setPriceRange("");
+      setPropertyType("");
+      setBedrooms("");
 
-      console.log('Property data stored successfully!');
+      console.log("Property data stored successfully!");
     } catch (error) {
-      console.log('Error storing property data:', error);
+      console.log("Error storing property data:", error);
     }
   };
 

@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-// import Button from "./Button";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
+import { auth } from "../../Firebase";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      logout();
+    } catch (error) {
+      console.log("Error logging out:", error);
+    }
   };
 
   return (
@@ -103,12 +115,14 @@ const Navbar = () => {
                   List Property
                 </li>
               </NavLink>
-            
-             
+
               <NavLink to="/login">
                 <li>
-                  <button className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500 my-2 mx-2">
-                    Login
+                  <button
+                    className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500"
+                    onClick={handleLogout}
+                  >
+                    Logout
                   </button>
                 </li>
               </NavLink>
