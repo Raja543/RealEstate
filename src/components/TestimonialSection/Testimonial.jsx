@@ -55,7 +55,7 @@ const Testimonial = () => {
                 Emily Johnson,
               </h1>
               <p className="text-[#ffff] text-base md:text-xl opacity-80">
-                Enterpreneur
+                Entrepreneur
               </p>
             </div>
           </div>
@@ -64,7 +64,7 @@ const Testimonial = () => {
         <div className="flex flex-col  md:justify-center md:items-center  py-2">
           <p className="text-base md:text-xl md:max-w-3xl text-justify md:text-center text-[#C3BFD0] p-4">
             Dwelling&apos;s user-friendly interface and exceptional customer
-            service set them apart. They made my homebuying process smooth and
+            service set them apart. They made my home buying process smooth and
             enjoyable. I&apos;m grateful for their expertise and support.
             Dwelling is the go-to platform for anyone in search of a perfect
             home.

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState , useEffect } from "react";
 import "./Login.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, provider } from "../../Firebase";
+import { auth , provider} from "../../Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
@@ -129,12 +129,10 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
-                  id="email"
-                  placeholder="Enter Your email address"
+                  name="email"
+                  placeholder="Email"
                   value={credentials.email}
                   onChange={handleChange}
-                  autoFocus
-                  autoComplete="email"
                   className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />
               </div>
@@ -152,10 +150,10 @@ const Login = () => {
                 </div>
                 <input
                   type="password"
+                  name="password"
                   placeholder="Password"
                   value={credentials.password}
                   onChange={handleChange}
-                  autoComplete="current-password"
                   className="px-4 py-2 transition duration-300 border  rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />
               </div>

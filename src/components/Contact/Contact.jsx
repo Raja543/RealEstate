@@ -106,7 +106,13 @@ function sendEmail() {
     if (hasError) {
       setErrors(updatedErrors);
     } else {
-      setErrors({});
+      setErrors({
+        subject: "",
+        name: "",
+        mobile: "",
+        description: "",
+        email: "",
+      });
 
       const timestamp = new Date();
 

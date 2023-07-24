@@ -2,7 +2,7 @@ import React, { useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const AuthContext = React.createContext();
+const AuthContext = React.createContext(undefined);
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(

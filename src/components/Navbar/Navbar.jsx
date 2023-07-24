@@ -43,12 +43,12 @@ const Navbar = () => {
               Home
             </li>
           </NavLink>
-          <NavLink to="/property-search">
+          <NavLink to="/findproperty">
             <li className="text-gray-800 text-xl hover:text-gray-500 pr-4">
               Find Property
             </li>
           </NavLink>
-          <NavLink to="/Property-list">
+          <NavLink to="/listproperty">
             <li className="text-gray-800 text-xl hover:text-gray-500 pr-2">
               List Property
             </li>
@@ -58,7 +58,7 @@ const Navbar = () => {
               Agents
             </li>
           </NavLink>
-          <NavLink to="/contact">
+          <NavLink to="/contacts">
             <li className="text-gray-800 text-xl hover:text-gray-500 pr-2">
               Contact Us
             </li>
@@ -102,15 +102,15 @@ const Navbar = () => {
                   Agents
                 </li>
               </NavLink>
-              <NavLink to="/contact">
+              <NavLink to="/contacts">
                 <li className="p-2 text-xl">Contact Us</li>
               </NavLink>
-              <NavLink to="/property-search">
+              <NavLink to="/findproperty">
                 <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
                   Find Property
                 </li>
               </NavLink>
-              <NavLink to="/Property-list">
+              <NavLink to="/listproperty">
                 <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
                   List Property
                 </li>
