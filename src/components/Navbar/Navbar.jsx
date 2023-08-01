@@ -66,8 +66,11 @@ const Navbar = () => {
         </ul>
         <div className="md:flex md:items-center hidden space-x-4">
           <NavLink to="/login">
-            <button className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500">
-              Login
+            <button
+              className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500"
+              onClick={handleLogout}
+            >
+              Logout
             </button>
           </NavLink>
         </div>
@@ -102,15 +105,15 @@ const Navbar = () => {
                   Agents
                 </li>
               </NavLink>
-              <NavLink to="/contacts">
+              <NavLink to="/contact">
                 <li className="p-2 text-xl">Contact Us</li>
               </NavLink>
-              <NavLink to="/findproperty">
+              <NavLink to="/property-search">
                 <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
                   Find Property
                 </li>
               </NavLink>
-              <NavLink to="/listproperty">
+              <NavLink to="/Property-list">
                 <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
                   List Property
                 </li>
@@ -119,7 +122,7 @@ const Navbar = () => {
               <NavLink to="/login">
                 <li>
                   <button
-                    className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500"
+                    className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500 my-2 mx-2"
                     onClick={handleLogout}
                   >
                     Logout

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getDatabase, ref, get, push, set } from "firebase/database";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
+import CarouselBanner from "../components/CarouselBanner/CarouselBanner";
 
 const PropertySearch = () => {
   const [location, setLocation] = useState("");
@@ -144,6 +145,9 @@ const PropertySearch = () => {
   return (
     <>
       <Navbar />
+      <div height={200} width = {300} >
+        <CarouselBanner />
+      </div>
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-2xl font-semibold mb-4">Property Search</h2>
         <div className="mb-4">
