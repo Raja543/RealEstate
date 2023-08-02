@@ -26,35 +26,21 @@ const Agent = () => {
   return (
     <>
       <Navbar />
-
-      <div className="grid grid-cols-2 md:grid-cols-4 p-10">
-        {loading ? (
-          <div>Loading agents...</div>
-        ) : (
-          agentIds.map((agentId) => (
-            <AgentsProfile key={agentId} agentId={agentId} />
-          ))
-        )}
-      </div>
-      <Footer />
-      <div className="min-h-screen grid place-items-center bg-indigo-400 font-mono">
-        <div className="bg-white h-80 w-64 rounded-md">
-          <div className="flex justify-center items-center leading-none">
-            <img
-              src="https://images.unsplash.com/photo-1585554414787-09b821c321c0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-              alt="pic"
-              className="h-40 w-56 rounded-md shadow-2xl mt-6 transform -translate-y-10 hover:-translate-y-4 transition duration-700"
-            />
-          </div>
-          <div className="p-3">
-            <p className="block mb-1 font-extralight">Modelling</p>
-            <p className="text-xs tracking-tighter text-gray-600">
-              When it is your time, it’s your time. There is no point in
-              worrying about what you can’t control.
-            </p>
-          </div>
+      <div className="px-10 pt-4 pb-20 bg-[#FFFAE9]">
+        <h1 className="text-center text-3xl font-bold m-4 capitalize">
+          Meet our Real Estate agents
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 p-2 items-center justify-center">
+          {loading ? (
+            <div>Loading agents...</div>
+          ) : (
+            agentIds.map((agentId) => (
+              <AgentsProfile key={agentId} agentId={agentId} />
+            ))
+          )}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

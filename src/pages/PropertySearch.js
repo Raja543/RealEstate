@@ -3,6 +3,7 @@ import { getDatabase, ref, get, push, set } from "firebase/database";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import CarouselBanner from "../components/CarouselBanner/CarouselBanner";
+import { NavLink } from "react-router-dom";
 
 const PropertySearch = () => {
   const [location, setLocation] = useState("");
@@ -145,9 +146,54 @@ const PropertySearch = () => {
   return (
     <>
       <Navbar />
-      <div height={200} width = {300} >
+      <div height={200} width={300}>
         <CarouselBanner />
       </div>
+      <div className="container flex-col mx-auto px-4 py-8">
+        <div className="flex-row">
+          <ul
+            className={`md:flex md:items-center hidden space-x-3  "block" : "hidden"
+            }`}
+          >
+            <NavLink to="/">
+              <li className="text-gray-800 text-xl hover:text-gray-500 pr-4">
+                Home
+              </li>
+            </NavLink>
+            <NavLink to="/findproperty">
+              <li className="text-gray-800 text-xl hover:text-gray-500 pr-4">
+                Find Property
+              </li>
+            </NavLink>
+            <NavLink to="/listproperty">
+              <li className="text-gray-800 text-xl hover:text-gray-500 pr-2">
+                List Property
+              </li>
+            </NavLink>
+            <NavLink to="/agents">
+              <li className="text-gray-800 text-xl hover:text-gray-500 pr-2">
+                Agents
+              </li>
+            </NavLink>
+            <NavLink to="/contacts">
+              <li className="text-gray-800 text-xl hover:text-gray-500 pr-2">
+                Contact Us
+              </li>
+            </NavLink>
+          </ul>
+        </div>
+        <div className="flex justify-between items-center">
+          <input
+            type="search"
+            placeholder="Search"
+            className="border border-gray-300 px-2 py-1 rounded"
+          />
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Search
+          </button>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-2xl font-semibold mb-4">Property Search</h2>
         <div className="mb-4">

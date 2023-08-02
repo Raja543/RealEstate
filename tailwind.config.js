@@ -8,7 +8,11 @@ module.exports = {
       'custom': ['Albert Sans', 'sans-serif'],
   },
     screens: {
+      'sm': '640px',
       'md': '865px',
+      'lg': '1024px', 
+      'xl': '1280px',
+
     },
     colors: { 
       black: "#191623;",

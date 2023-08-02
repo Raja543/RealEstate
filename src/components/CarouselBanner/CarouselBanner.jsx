@@ -8,7 +8,7 @@ const CarouselBanner = () => {
       <Carousel
         showThumbs={false}
         autoPlay={true}
-        infiniteLoop={false}
+        infiniteLoop={true}
         interval={4000}
         showStatus={false}
         showArrows={false}
