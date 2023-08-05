@@ -5,6 +5,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { HashLink } from "react-router-hash-link";
 
 const Contact = () => {
   const query = new URLSearchParams(useLocation().search);
@@ -50,7 +51,7 @@ const Contact = () => {
     setDescription(e.target.value);
   };
 
-function sendEmail() {
+  function sendEmail() {
     emailjs
       .send(
         "service_8bqc0u8",
@@ -125,8 +126,6 @@ function sendEmail() {
         timestamp: timestamp,
       });
 
-    
-
       sendEmail();
 
       console.log("Document written with ID: ", docRef.id);
@@ -136,7 +135,7 @@ function sendEmail() {
       setEmail("");
       setSubject("");
       setDescription("");
-      
+
       toast.success("🙏 Thank You, Our Team will contact you soon.", {
         position: "top-right",
         autoClose: 5000,
@@ -151,117 +150,126 @@ function sendEmail() {
   };
 
   return (
-    <>
-      <h1 className="text-4xl font-bold text-center mt-10">Contact Us</h1>
-      <div className="flex justify-center mt-10">
-        <div className="w-8/12 p-6 bg-gray-200 rounded border border-gray-300">
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-wrap mb-8">
-              <div className="w-full md:w-1/2">
-                <label htmlFor="name" className="block mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Enter Your Name"
-                  value={name}
-                  onChange={handleNameChange}
-                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-                />
-                {errors.name && (
-                  <span className="text-orange">{errors.name}</span>
-                )}
-              </div>
-              <div className="w-full md:w-1/2">
-                <label htmlFor="mobile" className="block mb-2">
-                  Mobile Number
-                </label>
-                <div className="flex">
-                  <input
-                    id="countryPin"
-                    className="w-1/5 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-                    value="+ 91"
-                    readOnly
-                  />
-                  <input
-                    type="number"
-                    id="mobileNumber"
-                    className="w-4/5 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-                    placeholder="Enter mobile number"
-                    value={mobile}
-                    onChange={handleMobileChange}
-                  />
-                </div>
-                {errors.mobile && (
-                  <span className="text-orange">{errors.mobile}</span>
-                )}
-              </div>
+    <div
+      className=" py-4 bg-no-repeat bg-cover bg-center h-[110vh] "
+      style={{ backgroundImage: "url('/images/cbg.jpeg')" }}
+    >
+      <div className="flex flex-row ">
+        <div className="w-3/5 py-40 px-20 ">
+          <p className="text-[#fff] text-6xl p-2">Luxurious House</p>
+          <p className="text-[#fff] text-6xl p-2">Malaibu Hills</p>
+          <p className="text-[#fff] text-2xl p-2">
+            Single property Classic theme with beautiful design and well
+            decorated.
+          </p>
+          <HashLink to="/findproperty">
+            <button className="bg-[#e16b35] max-w-fit text-[#fff] font-[Albert-sans] py-2 px-6 rounded-md duration-500 my-2 mx-2 text-lg">
+              Book Now
+            </button>
+          </HashLink>
+        </div>
+        <div className="w-2/5 bg-[#e9dfc1] text-[#1a237e] text-base opacity-90 mx-20 my-6 p-4 rounded-lg ">
+          <h1 className="text-4xl text-center ">Get in touch</h1>
+          <form className="flex flex-col m-2  ">
+            <div className="flex flex-col m-2">
+              <label htmlFor="name" className="font-semibold ">
+                Name
+              </label>
+              <input
+                type="name"
+                id="name"
+                value={name}
+                placeholder="Enter your name "
+                onChange={handleNameChange}
+                autoFocus
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black] "
+                required
+              />
+              {errors.name && (
+                <span className="text-[#e16b35]">{errors.name}</span>
+              )}
             </div>
-            <div className="flex flex-wrap mb-8">
-              <div className="w-full md:w-1/2">
-                <label htmlFor="email" className="block mb-2">
-                  Email ID
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Enter your Email ID "
-                  value={email}
-                  onChange={handleEmailChange}
-                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-                />
-                {errors.email && (
-                  <span className="text-orange">{errors.email}</span>
-                )}
-              </div>
-              <div className="w-full md:w-1/2">
-                <label htmlFor="subject" className="block mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  autoComplete="off"
-                  placeholder="Enter subject"
-                  value={subject}
-                  onChange={handleSubjectChange}
-                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"
-                />
-                {errors.subject && (
-                  <span className="text-orange">{errors.subject}</span>
-                )}
-              </div>
+            <div className="flex flex-col m-2">
+              <label htmlFor="email" className="text-sm font-semibold">
+                Email address
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                placeholder="Enter your email address"
+                onChange={handleEmailChange}
+                autoFocus
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
+                required
+              />
+              {errors.email && (
+                <span className="text-[#e16b35]">{errors.email}</span>
+              )}
             </div>
-            <div className="mb-8">
+            <div className="flex flex-col m-2">
+              <label htmlFor="mobile" className="block mb-2">
+                Mobile Number
+              </label>
+              <input
+                type="number"
+                id="mobileNumber"
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
+                placeholder="Enter mobile number"
+                value={mobile}
+                onChange={handleMobileChange}
+                required
+              />
+              {errors.mobile && (
+                <span className="text-[#e16b35]">{errors.mobile}</span>
+              )}
+            </div>
+            <div className="flex flex-col m-2">
+              <label htmlFor="subject" className="block mb-2">
+                Subject
+              </label>
+              <input
+                type="text"
+                id="subject"
+                autoComplete="off"
+                placeholder="Enter subject"
+                value={subject}
+                onChange={handleSubjectChange}
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
+              />
+              {errors.subject && (
+                <span className="text-[#e16b35]">{errors.subject}</span>
+              )}
+            </div>
+            <div className="flex flex-col m-2">
               <label htmlFor="description" className="block mb-2">
                 Describe your requirements :
               </label>
               <textarea
                 id="description"
-                rows="5"
+                rows="4"
                 placeholder="Describe your requirement"
                 value={description}
                 onChange={handleDescriptionChange}
-                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500 resize-none"
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black] resize-none"
               ></textarea>
               {errors.description && (
-                <span className="text-orange">{errors.description}</span>
+                <span className="text-[#e16b35]">{errors.description}</span>
               )}
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center">
               <button
                 type="submit"
-                className="bg-orange py-2 px-6 text-white rounded-md duration-500"
                 onClick={handleSubmit}
+                className="max-w-fit mx-auto px-4 py-2 text-lg mt-4 font-semibold text-white transition-colors duration-300 bg-[#e16b35] text-[#fff] rounded-md shadow hover:bg-[#ff6d2a] focus:ring-1 focus:ring-[black]"
               >
                 Submit
               </button>
-            </div>
+            </div>  
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

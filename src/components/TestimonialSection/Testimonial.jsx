@@ -10,7 +10,7 @@ const Testimonial = () => {
         showThumbs={false}
         autoPlay={true}
         infiniteLoop={true}
-        interval={2500}
+        interval={3500}
         showStatus={false}
         showArrows={false}
         useKeyboardArrows={true}
@@ -27,8 +27,8 @@ const Testimonial = () => {
             all things real estate
           </p>
           <div className="flex flex-col md:flex-row md:justify-center md:items-center py-3">
-            <div className="flex flex-col items-center md:px-4 sm:w-1/6 max-w-fit m-auto ">
-              <img src="/images/test1.svg" alt="testimonial1" />
+            <div className="flex flex-col items-center md:px-4  max-w-fit m-auto ">
+              <img src="/images/test1.svg" alt="testimonial1 c" />
             </div>
             <div className="flex flex-col items-center">
               <h1 className="text-[#ffff] text-2xl md:text-3xl">John Doe</h1>
@@ -47,7 +47,7 @@ const Testimonial = () => {
             investment properties with ease. I can&apos;t recommend them enough.
           </p>
           <div className="flex flex-col md:flex-row md:justify-center md:items-center py-3">
-            <div className="flex flex-col items-center md:px-4 sm:w-1/6 max-w-fit m-auto ">
+            <div className="flex flex-col items-center md:px-4 max-w-fit m-auto ">
               <img src="/images/test1.svg" alt="testimonial1" />
             </div>
             <div className="flex flex-col items-center">
@@ -70,7 +70,7 @@ const Testimonial = () => {
             home.
           </p>
           <div className="flex flex-col md:flex-row md:justify-center md:items-center py-3">
-            <div className="flex flex-col items-center md:px-4 sm:w-1/6 max-w-fit m-auto ">
+            <div className="flex flex-col items-center md:px-4  max-w-fit m-auto ">
               <img src="/images/test1.svg" alt="testimonial1" />
             </div>
             <div className="flex flex-col items-center">
@@ -90,7 +90,7 @@ const Testimonial = () => {
             quickly and effortlessly. Highly recommended
           </p>
           <div className="flex flex-col md:flex-row md:justify-center md:items-center py-3">
-            <div className="flex flex-col items-center md:px-4 sm:w-1/6 max-w-fit m-auto ">
+            <div className="flex flex-col items-center md:px-4  max-w-fit m-auto ">
               <img src="/images/test1.svg" alt="testimonial1" />
             </div>
             <div className="flex flex-col items-center">

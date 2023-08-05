@@ -14,6 +14,9 @@ module.exports = {
       'xl': '1280px',
 
     },
+    backgroundImage: {
+      'hero-lg': "url('/images/cbg.jpg')",
+  },
     colors: { 
       black: "#191623;",
       orange: "#FD5D11",

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../../AuthContext";
-import { auth } from "../../Firebase";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,16 +8,7 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const { logout } = useAuth();
-
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-      logout();
-    } catch (error) {
-      console.log("Error logging out:", error);
-    }
-  };
+  
 
   return (
     <header className="bg-[#FFFAE9] w-full">
@@ -68,9 +57,8 @@ const Navbar = () => {
           <NavLink to="/login">
             <button
               className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500"
-              onClick={handleLogout}
             >
-              Logout
+              Login
             </button>
           </NavLink>
         </div>
@@ -123,9 +111,8 @@ const Navbar = () => {
                 <li>
                   <button
                     className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500 my-2 mx-2"
-                    onClick={handleLogout}
                   >
-                    Logout
+                    Login
                   </button>
                 </li>
               </NavLink>
