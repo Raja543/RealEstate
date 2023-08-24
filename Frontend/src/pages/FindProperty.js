@@ -5,10 +5,8 @@ import Navbar from "../components/Navbar/Navbar";
 import CarouselBanner from "../components/CarouselBanner/CarouselBanner";
 import { AreaChart, Building2, MapPin } from "lucide-react";
 import { IndianRupee } from "lucide-react";
-// import axios from "axios";
-import PropTypes from "prop-types";
 
-const PropertySearch = () => {
+const FindProperty = () => {
   const [housename] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
@@ -157,7 +155,7 @@ const PropertySearch = () => {
     });
   }
 
-  const displayRazorpay = async () => {
+  const displayRazorpay = async (property) => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -169,6 +167,10 @@ const PropertySearch = () => {
 
     const data = await fetch("http://localhost:3000/razorpay", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ property }), // Send the property object to the backend
     }).then((t) => t.json());
 
     console.log(data);
@@ -176,26 +178,25 @@ const PropertySearch = () => {
     const options = {
       key: "rzp_test_36kqmf68BF7orC",
       currency: "INR",
-      amount: "49900", // 49900 paise = INR 499
+      amount: `${property.price} ` * 100,
       order_id: data.id,
-      name: "Donation",
+      name: "Dwelling Real estate",
       description: "Thank you for nothing. Please give us some money",
-      image: "http://localhost:3000/logo.svg",
+      image: "/images/favicon.ico",
       handler: function (response) {
         alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        alert("Payment Successful");
       },
       prefill: {
-        name: "Gaurav Kumar",
-        email: "gaurav.kumar@example.com",
-        contact: "9000090000",
+        name: "Raja Kumar",
+        email: "razakumarmahto952@gmail.com",
+        contact: "7903765195",
       },
       notes: {
-        address: "Razorpay Corporate Office",
+        address: "Dwelling Real estate",
       },
       theme: {
-        color: "#3399cc",
+        color: "#FFFAE9",
       },
     };
     const paymentObject = new window.Razorpay(options);
@@ -345,7 +346,7 @@ const PropertySearch = () => {
         <div className="mt-8">
           {loading && <p>Loading...</p>}
           {error && <p>{error}</p>}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mx-32 my-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mx-40 my-10">
             {matchingProperties.length === 0
               ? displayProperties.map((property) => (
                   <div
@@ -360,7 +361,7 @@ const PropertySearch = () => {
                       }}
                     ></div>
                     <div className="p-4">
-                      <p className="Capitalize text-left text-2xl font-extrabold py-2">
+                      <p className="Capitalize  text-left text-2xl font-extrabold py-2">
                         {property.housename}
                       </p>
                       <div className="flex flex-row items-center justify-between">
@@ -382,7 +383,7 @@ const PropertySearch = () => {
                       <div>
                         <button
                           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                          onClick={displayRazorpay}
+                          onClick={() => displayRazorpay(property)} // Pass the property to the function
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -427,35 +428,167 @@ const PropertySearch = () => {
                       <div>
                         <p className="text-gray">{property.area}</p>
                       </div>
+                      <div>
+                        <button
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={() => displayRazorpay(property)} // Pass the property to the function
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Buy now
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
           </div>
         </div>
       </div>
+
+      <div className="mx-40 my-10">
+        <h1 className="text-4xl px-4 py-8 font-extrabold ">
+          Explore the best properties in your city
+        </h1>
+        <div className="grid grid-cols-4 items-center">
+          <div className="flex flex-row  my-4">
+            <img
+              width={100}
+              height={98}
+              className="rounded-lg object-cover"
+              src="/images/c1.jpeg"
+              alt="display1"
+            ></img>
+            <div className="flex flex-col p-2 justify-center ">
+              <p className="text-xl font-extrabold py-2">Delhi / NCR</p>
+              <p className="text-base">59,000+ properties</p>
+            </div>
+          </div>
+          <div className="flex flex-row  my-4">
+            <img
+              width={100}
+              height={98}
+              className="rounded-lg object-cover"
+              src="/images/c2.jpeg"
+              alt="display1"
+            ></img>
+            <div className="flex flex-col p-2 justify-center ">
+              <p className="text-xl font-extrabold py-2">Banglore</p>
+              <p className="text-base">15,000+ properties</p>
+            </div>
+          </div>
+          <div className="flex flex-row  my-4">
+            <img
+              width={100}
+              height={98}
+              className="rounded-lg object-cover"
+              src="/images/c3.jpeg"
+              alt="display1"
+            ></img>
+            <div className="flex flex-col p-2 justify-center ">
+              <p className="text-xl font-extrabold py-2">Pune</p>
+              <p className="text-base">19,000+ properties</p>
+            </div>
+          </div>
+          <div className="flex flex-row  my-4">
+            <img
+              width={100}
+              height={98}
+              className="rounded-lg object-cover"
+              src="/images/c4.jpeg"
+              alt="display1"
+            ></img>
+            <div className="flex flex-col p-2 justify-center ">
+              <p className="text-xl font-extrabold py-2">Chennai</p>
+              <p className="text-base">17,000+ properties</p>
+            </div>
+          </div>
+          <div className="flex flex-row  my-4">
+            <img
+              width={100}
+              height={98}
+              className="rounded-lg object-cover"
+              src="/images/c5.jpeg"
+              alt="display1"
+            ></img>
+            <div className="flex flex-col p-2 justify-center ">
+              <p className="text-xl font-extrabold py-2">Mumbai</p>
+              <p className="text-base">37,000+ properties</p>
+            </div>
+          </div>
+          <div className="flex flex-row  my-4">
+            <img
+              width={100}
+              height={98}
+              className="rounded-lg object-cover"
+              src="/images/c6.jpeg"
+              alt="display1"
+            ></img>
+            <div className="flex flex-col p-2 justify-center ">
+              <p className="text-xl font-extrabold py-2">Hyderabad</p>
+              <p className="text-base">48,000+ properties</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center m-16">
+        <h1 className="text-4xl text-center font-black p-4  max-w-2xl">
+          Choose from a wide variety of commercial properties
+        </h1>
+        <div className="flex flex-row items-center justify-center">
+          <div
+            className="flex flex-col mx-6 my-4 px-16 py-20 bg-[#e5e3e3] relative bg-opacity-60 bg-repeat bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/images/bgc1.webp')",
+              width: "512px",
+              height: "450px",
+              backgroundBlendMode: "overlay",
+            }}
+          >
+            <p className="text-base text-left p-2 font-bold uppercase text-[#626a78]">
+              Buy For commercial use
+            </p>
+            <h1 className="text-4xl text-left font-black leading-10 p-2">
+              Buy a commercial property
+            </h1>
+            <p className="text-base text-left p-2 font-bold">
+              Explore from Office Spaces, Co-working spaces, Retail Shops, Land,
+              Factories and more
+            </p>
+            <button className="max-w-fit  px-4 py-2 text-lg mt-4 font-semibold text-white transition-colors duration-300 bg-[#e16b35] text-[#fff] rounded-md shadow hover:bg-[#ff6d2a]">
+              Explore Buying Commercial
+            </button>
+          </div>
+          <div
+            className="flex flex-col mx-6 my-4 px-16 py-20 bg-[#e5e3e3] relative bg-opacity-60 bg-repeat bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/images/bgc2.webp')",
+              width: "512px",
+              height: "450px",
+              backgroundBlendMode: "overlay",
+            }}
+          >
+            <p className="text-base text-left p-2 font-bold uppercase text-[#626a78]">
+              {" "}
+              LEASE FOR COMMERCIAL USE
+            </p>
+            <h1 className="text-4xl text-left font-black leading-10 p-2">
+              Lease a Commercial property
+            </h1>
+            <p className="text-base text-left p-2 font-bold">
+              Explore from Office Spaces, Co-working spaces, Retail Shops, Land,
+              Factories and more
+            </p>
+            <button className="max-w-fit  px-4 py-2 text-lg mt-4 font-semibold text-white transition-colors duration-300 bg-[#e16b35] text-[#fff] rounded-md shadow hover:bg-[#ff6d2a]">
+              Explore Leasing Commercial
+            </button>
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </>
   );
 };
 
-export default PropertySearch;
-
-PropertySearch.propTypes = {
-  housename: PropTypes.string,
-  location: PropTypes.string,
-  price: PropTypes.string,
-  propertyType: PropTypes.string,
-  furnitureType: PropTypes.string,
-  bedrooms: PropTypes.string,
-  area: PropTypes.string,
-  displayProperties: PropTypes.array,
-  matchingProperties: PropTypes.array,
-  loading: PropTypes.bool,
-  error: PropTypes.string,
-  handleSearch: PropTypes.func,
-  performPropertySearch: PropTypes.func,
-  fetchProperties: PropTypes.func,
-  shuffleArray: PropTypes.func,
-  loadScript: PropTypes.func,
-  displayRazorpay: PropTypes.func,
-};
+export default FindProperty;

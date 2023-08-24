@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import ContactHome from "./pages/ContactHome";
 import Login from "./components/Login/Login";
 import Signup from "./components/Login/Signup";
-import PropertySearch from "./pages/PropertySearch";
+import FindProperty from "./pages/FindProperty";
 import Agent from "./pages/Agent";
 import PropertyList from "./pages/PropertyList";
 
@@ -20,7 +20,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<Home />} />
-            <Route path="/findproperty" element={<PropertySearch />} />
+            <Route path="/findproperty" element={<FindProperty />} />
             <Route path="/listproperty" element={<PropertyList />} />
             <Route path="/agents" element={<Agent />} />
             <Route path="/contacts" element={<ContactHome />} />
@@ -33,3 +33,5 @@ function App() {
 }
 
 export default App;
+
+
