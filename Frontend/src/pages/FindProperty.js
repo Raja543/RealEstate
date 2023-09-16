@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, get } from "firebase/database";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
@@ -7,40 +8,32 @@ import { AreaChart, Building2, MapPin } from "lucide-react";
 import { IndianRupee } from "lucide-react";
 
 const FindProperty = () => {
-  const [housename] = useState("");
   const [location, setLocation] = useState("");
-  const [price, setPrice] = useState("");
   const [propertyType, setPropertyType] = useState("");
-  const [furnitureType, setfurnitureType] = useState("");
-  const [bedrooms, setBedrooms] = useState("");
-  const [area, setArea] = useState("");
   const [displayProperties, setDisplayProperties] = useState([]);
   const [matchingProperties, setMatchingProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearch = async (e) => {
     e.preventDefault();
 
     const searchCriteria = {
-      housename,
-      location,
-      price,
       propertyType,
-      bedrooms,
-      area,
-      furnitureType,
+      location,
     };
 
     try {
-      setLoading(true); // Set loading to true while fetching data
-      setError(null); // Clear any previous error
+      setLoading(true);
+      setError(null);
       const matchingProperties = await performPropertySearch(searchCriteria);
       setMatchingProperties(matchingProperties);
     } catch (error) {
-      setError("Error performing search");
+      // Redirect to the 404 page
+      navigate("/404");
     } finally {
-      setLoading(false); // Set loading back to false after fetching data
+      setLoading(false);
     }
   };
 
@@ -68,32 +61,22 @@ const FindProperty = () => {
         }
 
         if (
-          searchCriteria.priceRange &&
-          property.price !== searchCriteria.price
-        ) {
-          return false;
-        }
-
-        if (
           searchCriteria.propertyType &&
           property.propertyType !== searchCriteria.propertyType
         ) {
           return false;
         }
 
-        if (
-          searchCriteria.bedrooms &&
-          property.bedrooms !== searchCriteria.bedrooms
-        ) {
-          return false;
-        }
-
-        if (searchCriteria.area && property.area !== searchCriteria.area) {
-          return false;
-        }
+        // Add similar checks for other criteria
 
         return true;
       });
+
+      if (matchingProperties.length === 0) {
+        setError("No matching properties found.");
+      } else {
+        setError(null); // Clear any previous error if matching properties were found.
+      }
 
       console.log("Matching Properties:", matchingProperties);
 
@@ -240,69 +223,11 @@ const FindProperty = () => {
             className="border border-gray-300 px-2 py-1 rounded w-2/4"
           />
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-orange  text-[#fff] font-bold py-2 px-4 rounded-lg mx-auto"
             onClick={handleSearch}
           >
             Search
           </button>
-        </div>
-        <div className="flex flex-row justify-between items-center ">
-          <div className="mb-4">
-            <label htmlFor="price" className="block mb-1">
-              Price :
-            </label>
-            <input
-              type="number"
-              id="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              className="border border-gray-300 px-2 py-1 rounded"
-            ></input>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="propertyType" className="block mb-1">
-              Furniture type:
-            </label>
-            <select
-              id="furnitureType"
-              value={furnitureType}
-              onChange={(e) => setfurnitureType(e.target.value)}
-              className="border border-gray-300 px-2 py-1 rounded"
-            >
-              <option value="">Any</option>
-              <option value="Non-furnished">Non-furnished</option>
-              <option value="Semi-furnished">Semi-furnished</option>
-              <option value="Full-furnished">Full-furnished</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="bedrooms" className="block mb-1">
-              Bedrooms:
-            </label>
-            <select
-              id="bedrooms"
-              value={bedrooms}
-              onChange={(e) => setBedrooms(e.target.value)}
-              className="border border-gray-300 px-2 py-1 rounded"
-            >
-              <option value="">Any</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="area" className="block mb-1">
-              Area:
-            </label>
-            <input
-              type="number"
-              id="area"
-              value={area}
-              onChange={(e) => setArea(e.target.value)}
-              className="border border-gray-300 px-2 py-1 rounded"
-            ></input>
-          </div>
         </div>
       </div>
 
@@ -344,104 +269,105 @@ const FindProperty = () => {
       {/* display house card */}
       <div>
         <div className="mt-8">
-          {loading && <p>Loading...</p>}
-          {error && <p>{error}</p>}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mx-40 my-10">
-            {matchingProperties.length === 0
-              ? displayProperties.map((property) => (
-                  <div
-                    key={property.id}
-                    className="bg-white shadow-xl  rounded-lg overflow-hidden cursor-pointer "
-                  >
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mx-40 my-10">
+              {matchingProperties.length === 0
+                ? displayProperties.map((property) => (
                     <div
-                      className="bg-cover bg-center h-56 p-4"
-                      style={{
-                        backgroundImage:
-                          "url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)",
-                      }}
-                    ></div>
-                    <div className="p-4">
-                      <p className="Capitalize  text-left text-2xl font-extrabold py-2">
-                        {property.housename}
-                      </p>
-                      <div className="flex flex-row items-center justify-between">
-                        <div className="text-lg flex flex-row ">
-                          <IndianRupee /> {property.price}
-                        </div>
-                        <div className=" text-lg flex flex-row ">
-                          <AreaChart /> {property.area} sqft
-                        </div>
-                      </div>
-                      <div className="flex flex-row items-center justify-between my-2">
-                        <div className="text-lg flex flex-row">
-                          <MapPin /> {property.location}
-                        </div>
-                        <div className="text-lg flex flex-row">
-                          <Building2 /> {property.propertyType}
-                        </div>
-                      </div>
-                      <div>
-                        <button
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                          onClick={() => displayRazorpay(property)} // Pass the property to the function
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Buy now
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              : matchingProperties.map((property) => (
-                  <div
-                    key={property.id}
-                    className="bg-white shadow-xl  rounded-lg overflow-hidden"
-                  >
-                    <div
-                      className="bg-cover bg-center h-56 p-4"
-                      style={{
-                        backgroundImage:
-                          "url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)",
-                      }}
+                      key={property.id}
+                      className="bg-white shadow-xl rounded-lg overflow-hidden cursor-pointer"
                     >
-                      <div className="flex justify-end">
-                        <svg
-                          className="h-6 w-6 text-white fill-current"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12.76 3.76a6 6 0 0 1 8.48 8.48l-8.53 8.54a1 1 0 0 1-1.42 0l-8.53-8.54a6 6 0 0 1 8.48-8.48l.76.75.76-.75zm7.07 7.07a4 4 0 1 0-5.66-5.66l-1.46 1.47a1 1 0 0 1-1.42 0L9.83 5.17a4 4 0 1 0-5.66 5.66L12 18.66l7.83-7.83z"></path>
-                        </svg>
+                      <div
+                        className="bg-cover bg-center h-56 p-4"
+                        style={{
+                          backgroundImage:
+                            "url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)",
+                        }}
+                      ></div>
+                      <div className="p-4">
+                        <p className="capitalize text-left text-2xl font-extrabold py-2">
+                          {property.housename}
+                        </p>
+                        <div className="flex flex-row items-center justify-between">
+                          <div className="text-lg flex flex-row">
+                            <IndianRupee /> {property.price}
+                          </div>
+                          <div className="text-lg flex flex-row">
+                            <AreaChart /> {property.area} sqft
+                          </div>
+                        </div>
+                        <div className="flex flex-row items-center justify-between my-2">
+                          <div className="text-lg flex flex-row">
+                            <MapPin /> {property.location}
+                          </div>
+                          <div className="text-lg flex flex-row">
+                            <Building2 /> {property.propertyType}
+                          </div>
+                        </div>
+                        <div>
+                          <button
+                            className="bg-orange text-[#fff] font-bold py-2 px-4 rounded-lg mx-auto"
+                            onClick={() => displayRazorpay(property)} // Pass the property to the function
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Buy now
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <div className="p-4">
-                      <p className="uppercase tracking-wide text-sm font-bold text-gray-700">
-                        <Building2 /> {property.housename}
-                      </p>
-                      <div className="text-3xl text-gray-900 flex-row">
-                        <IndianRupee /> {property.price}
-                      </div>
-                      <div className="text-gray-700 flex-row">
-                        <MapPin /> {property.location}
-                      </div>
-                      <div>
-                        <p className="text-gray">{property.area}</p>
-                      </div>
-                      <div>
-                        <button
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                          onClick={() => displayRazorpay(property)} // Pass the property to the function
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Buy now
-                        </button>
+                  ))
+                : matchingProperties.map((property) => (
+                    <div
+                      key={property.id}
+                      className="bg-white shadow-xl rounded-lg overflow-hidden cursor-pointer"
+                    >
+                      <div
+                        className="bg-cover bg-center h-56 p-4"
+                        style={{
+                          backgroundImage:
+                            "url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)",
+                        }}
+                      ></div>
+                      <div className="p-4">
+                        <p className="capitalize text-left text-2xl font-extrabold py-2">
+                          {property.housename}
+                        </p>
+                        <div className="flex flex-row items-center justify-between">
+                          <div className="text-lg flex flex-row">
+                            <IndianRupee /> {property.price}
+                          </div>
+                          <div className="text-lg flex flex-row">
+                            <AreaChart /> {property.area} sqft
+                          </div>
+                        </div>
+                        <div className="flex flex-row items-center justify-between my-2">
+                          <div className="text-lg flex flex-row">
+                            <MapPin /> {property.location}
+                          </div>
+                          <div className="text-lg flex flex-row">
+                            <Building2 /> {property.propertyType}
+                          </div>
+                        </div>
+                        <div>
+                          <button
+                            className="bg-orange text-[#fff] font-bold py-2 px-4 rounded-lg mx-auto"
+                            onClick={() => displayRazorpay(property)} // Pass the property to the function
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Buy now
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-          </div>
+                  ))}
+            </div>
+          )}
         </div>
       </div>
 

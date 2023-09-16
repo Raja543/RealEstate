@@ -9,7 +9,7 @@ import Signup from "./components/Login/Signup";
 import FindProperty from "./pages/FindProperty";
 import Agent from "./pages/Agent";
 import PropertyList from "./pages/PropertyList";
-
+import Error404 from "./components/Error404/Error404";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
             <Route path="/agents" element={<Agent />} />
             <Route path="/contacts" element={<ContactHome />} />
             <Route path="*" element={<Home />} />
+            <Route path="/404" element={<Error404 />} />
           </Routes>
         </AuthProvider>
       </Router>
@@ -33,5 +34,3 @@ function App() {
 }
 
 export default App;
-
-

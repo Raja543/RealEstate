@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { getDatabase, ref, get, push, set } from "firebase/database";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
+import { AreaChart, Building2, MapPin } from "lucide-react";
+import { IndianRupee } from "lucide-react";
 
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
@@ -74,12 +76,73 @@ const PropertyList = () => {
       });
   }, []);
 
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  const displayRazorpay = async (property) => {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const data = await fetch("http://localhost:3000/razorpay", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ property }), // Send the property object to the backend
+    }).then((t) => t.json());
+
+    console.log(data);
+
+    const options = {
+      key: "rzp_test_36kqmf68BF7orC",
+      currency: "INR",
+      amount: `${property.price} ` * 100,
+      order_id: data.id,
+      name: "Dwelling Real estate",
+      description: "Thank you for nothing. Please give us some money",
+      image: "/images/favicon.ico",
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+        alert("Payment Successful");
+      },
+      prefill: {
+        name: "Raja Kumar",
+        email: "razakumarmahto952@gmail.com",
+        contact: "7903765195",
+      },
+      notes: {
+        address: "Dwelling Real estate",
+      },
+      theme: {
+        color: "#FFFAE9",
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
+
   return (
     <>
       <Navbar />
-      <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-4">Property List</h1>
-        <div className="mb-4">
+      <div className="flex flex-row min-h-screen ">
+        <div className="w-80 overflow-hidden sticky top-0 left-0 h-[90vh] ">
           <form onSubmit={addProperty}>
             <div className="mb-4">
               <label htmlFor="location" className="block mb-1">
@@ -142,7 +205,7 @@ const PropertyList = () => {
               </select>
             </div>
             <button
-              type="submit" 
+              type="submit"
               onClick={addProperty}
               className="bg-green-500 text-white px-4 py-2 rounded ml-4 hover:bg-green-600"
             >
@@ -150,17 +213,56 @@ const PropertyList = () => {
             </button>
           </form>
         </div>
-        {properties.map((property) => (
-          <div
-            key={property.id}
-            className="border border-gray-200 rounded p-4 mb-4"
-          >
-            <h2 className="text-xl font-bold mb-2">{property.location}</h2>
-            <p className="text-gray-600 mb-2">Price: {property.priceRange}</p>
-            <p className="text-gray-600 mb-2">Type: {property.propertyType}</p>
-            <p className="text-gray-600 mb-2">Bedrooms: {property.bedrooms}</p>
-          </div>
-        ))}
+        <div className=" overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-12 ml-12 my-2 p-4  ">
+          <h1 className="text-4xl font-bold text-center col-span-3">
+            Listed Properties
+          </h1>
+          {properties.map((property) => (
+            <div
+              key={property.id}
+              className="bg-white shadow-xl rounded-lg overflow-hidden cursor-pointer "
+            >
+              <div
+                className="bg-cover bg-center h-56 p-4"
+                style={{
+                  backgroundImage:
+                    "url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)",
+                }}
+              ></div>
+              <div className="p-4">
+                <p className="Capitalize  text-left text-2xl font-extrabold py-2">
+                  {property.housename}
+                </p>
+                <div className="flex flex-row items-center justify-between">
+                  <div className="text-lg flex flex-row ">
+                    <IndianRupee /> {property.price}
+                  </div>
+                  <div className=" text-lg flex flex-row ">
+                    <AreaChart /> {property.area} sqft
+                  </div>
+                </div>
+                <div className="flex flex-row items-center justify-between my-2">
+                  <div className="text-lg flex flex-row">
+                    <MapPin /> {property.location}
+                  </div>
+                  <div className="text-lg flex flex-row">
+                    <Building2 /> {property.propertyType}
+                  </div>
+                </div>
+                <div className="">
+                  <button
+                    className="bg-orange  text-[#fff] font-bold py-2 px-4 rounded-lg mx-auto"
+                    onClick={() => displayRazorpay(property)} // Pass the property to the function
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Buy now
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <Footer />
     </>
