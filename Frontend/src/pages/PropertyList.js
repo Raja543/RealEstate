@@ -105,13 +105,13 @@ const PropertyList = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ property }), // Send the property object to the backend
+      body: JSON.stringify({ property }),
     }).then((t) => t.json());
 
     console.log(data);
 
     const options = {
-      key: "rzp_test_36kqmf68BF7orC",
+      key: "RAZORPAY_KEYID",
       currency: "INR",
       amount: `${property.price} ` * 100,
       order_id: data.id,

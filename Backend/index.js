@@ -47,40 +47,41 @@ app.post("/verification", (req, res) => {
 });
 
 app.post("/razorpay", async (req, res) => {
-	try {
-	  const property = req.body.property; // Get the property object from the request body
-  
-	  // Extract necessary details from the property object
-	  const price = property.price; // Modify this according to your property object structure
-	  // Other details like property name, description, etc.
-  
-	  // You can add any other required logic here, e.g., validation, etc.
-  
-	  const payment_capture = 1;
-	  const currency = "INR";
-  
-	  const options = {
-		amount: price * 100,
-		currency,
-		receipt: shortid.generate(),
-		payment_capture,
-	  };
-  
-	  // Create the Razorpay order
-	  const response = await razorpay.orders.create(options);
-	  console.log("Razorpay response:", response);
-  
-	  res.json({
-		id: response.id,
-		currency: response.currency,
-		amount: response.amount,
-	  });
-	} catch (error) {
-	  console.error("Error handling payment:", error);
-	  res.status(500).json({ error: "An error occurred while processing payment" });
-	}
-  });
-  
+  try {
+    const property = req.body.property; // Get the property object from the request body
+
+    // Extract necessary details from the property object
+    const price = property.price; // Modify this according to your property object structure
+    // Other details like property name, description, etc.
+
+    // You can add any other required logic here, e.g., validation, etc.
+
+    const payment_capture = 1;
+    const currency = "INR";
+
+    const options = {
+      amount: price * 100,
+      currency,
+      receipt: shortid.generate(),
+      payment_capture,
+    };
+
+    // Create the Razorpay order
+    const response = await razorpay.orders.create(options);
+    console.log("Razorpay response:", response);
+
+    res.json({
+      id: response.id,
+      currency: response.currency,
+      amount: response.amount,
+    });
+  } catch (error) {
+    console.error("Error handling payment:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while processing payment" });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
