@@ -133,6 +133,7 @@ const Login = () => {
                   placeholder="Email"
                   value={credentials.email}
                   onChange={handleChange}
+                  autoComplete="username"
                   className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />
               </div>
@@ -154,6 +155,7 @@ const Login = () => {
                   placeholder="Password"
                   value={credentials.password}
                   onChange={handleChange}
+                  autoComplete="current-password"
                   className="px-4 py-2 transition duration-300 border  rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
                 />
               </div>

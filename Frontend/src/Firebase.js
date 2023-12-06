@@ -25,9 +25,6 @@ const provider = new GoogleAuthProvider();
 
 const database = getDatabase(app);
 
-
-
-
 export { db , auth , provider , database };
 
 

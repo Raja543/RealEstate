@@ -5,9 +5,10 @@ import PropTypes from "prop-types";
 const AuthContext = React.createContext(undefined);
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(
-    sessionStorage.getItem("user")
-  );
+  const [currentUser, setCurrentUser] = useState(() => {
+    const storedUser = sessionStorage.getItem("user");
+    return storedUser !== null ? storedUser : null;
+  });
 
   const navigate = useNavigate();
 
@@ -32,13 +33,13 @@ export function AuthProvider({ children }) {
     [currentUser]
   );
 
-  return <AuthContext.Provider value={value}>
-    {children}
-    </AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export function useAuth() {
