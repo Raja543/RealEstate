@@ -38,8 +38,6 @@ export function AuthProvider({ children }) {
 
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  login: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
 };
 
 export function useAuth() {

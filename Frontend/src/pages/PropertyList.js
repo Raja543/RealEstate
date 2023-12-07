@@ -9,13 +9,52 @@ const PropertyList = () => {
   const [properties, setProperties] = useState([]);
   const [newProperty, setNewProperty] = useState({
     location: "",
-    priceRange: "",
+    price: "",
     propertyType: "",
-    bedrooms: "",
+    area: "",
+  });
+  const [errors, setErrors] = useState({
+    location: "",
+    price: "",
+    propertyType: "",
+    area: "",
   });
 
   const addProperty = async (e) => {
     e.preventDefault();
+    let hasError = false;
+    const updatedErrors = {};
+
+    if (newProperty.location.trim() === "") {
+      updatedErrors.location = "Location is required";
+      hasError = true;
+    }
+
+    if (newProperty.price.trim() === "") {
+      updatedErrors.price = "Price is required";
+      hasError = true;
+    }
+
+    if (newProperty.propertyType.trim() === "") {
+      updatedErrors.propertyType = "Property type is required";
+      hasError = true;
+    }
+
+    if (newProperty.area.trim() === "") {
+      updatedErrors.area = "Area is required";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrors(updatedErrors);
+    } else {
+      setErrors({
+        location: "",
+        price: "",
+        propertyType: "",
+        area: "",
+      });
+    }
 
     try {
       const db = getDatabase();
@@ -23,21 +62,19 @@ const PropertyList = () => {
       const newPropertyRef = push(propertiesRef);
       await set(newPropertyRef, {
         location: newProperty.location,
-        priceRange: newProperty.priceRange,
+        price: newProperty.price,
         propertyType: newProperty.propertyType,
-        bedrooms: newProperty.bedrooms,
+        area: newProperty.area,
       });
 
       setNewProperty({
         location: "",
-        priceRange: "",
+        price: "",
         propertyType: "",
-        bedrooms: "",
+        area: "",
       });
-
-      console.log("Property data stored successfully!");
     } catch (error) {
-      console.log("Error storing property data:", error);
+      return [];
     }
   };
 
@@ -63,102 +100,117 @@ const PropertyList = () => {
         });
         setProperties(propertyData);
       } catch (error) {
-        console.log("Error fetching properties:", error);
+        return [];
       }
     };
-
-    fetchProperties()
-      .then(() => {
-        console.log("Property fetch successful!");
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    fetchProperties();
   }, []);
 
   return (
     <>
       <Navbar />
-      <div className="flex flex-row min-h-screen ">
-        <div className="w-80 overflow-hidden sticky top-0 left-0 h-[90vh] ">
-          <form onSubmit={addProperty}>
-            <div className="mb-4">
-              <label htmlFor="location" className="block mb-1">
-                Location:
+      <div className="flex bg-[#f7eed2] flex-row min-h-screen ">
+        <div className="w-80 bg-[#f7eed2] text-[#1a237e] overflow-hidden text-base opacity-90  sticky top-0 left-0 h-[90vh]  ">
+          <h1 className="text-2xl font-bold text-center pt-6  ">
+            Submit Your Listing
+          </h1>
+          <p className="text-base px-4 py-2 text-center">
+            Enter the necessary information to create a listing for your
+            property.
+          </p>
+          <form onSubmit={addProperty} className="flex flex-col m-2">
+            <div className="flex flex-col m-2">
+              <label htmlFor="location" className="font-semibold">
+                Location
               </label>
               <input
                 type="text"
                 id="location"
+                name="location"
                 value={newProperty.location}
                 onChange={handleChange}
-                className="border border-gray-300 px-2 py-1 rounded"
+                placeholder="Enter location"
+                autoFocus
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black] "
+                required
               />
+              {errors.location && (
+                <span className="text-[#e16b35]">{errors.location}</span>
+              )}
             </div>
-            <div className="mb-4">
-              <label htmlFor="priceRange" className="block mb-1">
-                Price Range:
+            <div className="flex flex-col m-2">
+              <label htmlFor="price" className="text-sm font-semibold">
+                Price
               </label>
-              <select
-                id="priceRange"
-                value={newProperty.priceRange}
+              <input
+                type="text"
+                id="price"
+                name="price"
+                value={newProperty.price}
                 onChange={handleChange}
-                className="border border-gray-300 px-2 py-1 rounded"
-              >
-                <option value="">Any</option>
-                <option value="0-100000">$0 - $100,000</option>
-                <option value="100000-200000">$100,000 - $200,000</option>
-                <option value="200000-300000">$200,000 - $300,000</option>
-              </select>
+                placeholder="Enter price"
+                autoFocus
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
+                required
+              />
+              {errors.price && (
+                <span className="text-[#e16b35]">{errors.price}</span>
+              )}
             </div>
-            <div className="mb-4">
-              <label htmlFor="propertyType" className="block mb-1">
-                Property Type:
+            <div className="flex flex-col m-2">
+              <label htmlFor="propertyType" className="block mb-2">
+                Property Type
               </label>
-              <select
+              <input
+                type="text"
                 id="propertyType"
+                name="propertyType"
+                autoComplete="off"
+                placeholder="Enter property type"
                 value={newProperty.propertyType}
                 onChange={handleChange}
-                className="border border-gray-300 px-2 py-1 rounded"
-              >
-                <option value="">Any</option>
-                <option value="house">House</option>
-                <option value="apartment">Apartment</option>
-                <option value="condo">Condo</option>
-              </select>
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
+              />
+              {errors.propertyType && (
+                <span className="text-[#e16b35]">{errors.propertyType}</span>
+              )}
             </div>
-            <div className="mb-4">
-              <label htmlFor="bedrooms" className="block mb-1">
-                Bedrooms:
+            <div className="flex flex-col m-2">
+              <label htmlFor="area" className="block mb-2">
+                Area in sqft
               </label>
-              <select
-                id="bedrooms"
-                value={newProperty.bedrooms}
+              <input
+                type="number"
+                id="area"
+                name="area"
+                className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-1 focus:ring-[black]"
+                placeholder="Enter area in sqft"
+                value={newProperty.area}
                 onChange={handleChange}
-                className="border border-gray-300 px-2 py-1 rounded"
-              >
-                <option value="">Any</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
+                required
+              />
+              {errors.area && (
+                <span className="text-[#e16b35]">{errors.area}</span>
+              )}
             </div>
-            <button
-              type="submit"
-              onClick={addProperty}
-              className="bg-green-500 text-white px-4 py-2 rounded ml-4 hover:bg-green-600"
-            >
-              addProperty
-            </button>
+            <div className="flex justify-center items-center">
+              <button
+                type="submit"
+                className="max-w-fit mx-auto px-4 py-2 text-lg mt-4 font-semibold text-white transition-colors duration-300 bg-[#e16b35] text-[#fff] rounded-md shadow hover:bg-[#ff6d2a] focus:ring-1 focus:ring-[black]"
+              >
+                Add Property
+              </button>
+            </div>
           </form>
         </div>
-        <div className=" overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-12 ml-12 my-2 p-4  ">
-          <h1 className="text-4xl font-bold text-center col-span-3">
+        <div className=" bg-[#FFFAE9] overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-12 ml-4">
+          <h1 className="text-4xl font-bold text-center col-span-3 mt-4">
             Listed Properties
           </h1>
           {properties.map((property) => (
             <div
               key={property.id}
-              className="bg-white shadow-xl rounded-lg overflow-hidden cursor-pointer "
+              className="bg-[#ffffffd5] shadow-xl rounded-lg overflow-hidden cursor-pointer "
             >
               <div
                 className="bg-cover bg-center h-56 p-4"

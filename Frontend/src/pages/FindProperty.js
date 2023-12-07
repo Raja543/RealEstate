@@ -9,7 +9,6 @@ import { IndianRupee } from "lucide-react";
 
 const FindProperty = () => {
   const [location, setLocation] = useState("");
-  const [propertyType, setPropertyType] = useState("");
   const [displayProperties, setDisplayProperties] = useState([]);
   const [matchingProperties, setMatchingProperties] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,7 +19,6 @@ const FindProperty = () => {
     e.preventDefault();
 
     const searchCriteria = {
-      propertyType,
       location,
     };
 
@@ -29,6 +27,14 @@ const FindProperty = () => {
       setError(null);
       const matchingProperties = await performPropertySearch(searchCriteria);
       setMatchingProperties(matchingProperties);
+      if (matchingProperties.length > 0) {
+        const houseCardSection = document.getElementById("houseCardSection");
+        if (houseCardSection) {
+          houseCardSection.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        navigate("/404");
+      }
     } catch (error) {
       navigate("/404");
     } finally {
@@ -50,7 +56,6 @@ const FindProperty = () => {
         });
       });
 
-      // Apply client-side filtering based on the search criteria
       const matchingProperties = allProperties.filter((property) => {
         if (
           searchCriteria.location &&
@@ -58,30 +63,16 @@ const FindProperty = () => {
         ) {
           return false;
         }
-
-        if (
-          searchCriteria.propertyType &&
-          property.propertyType !== searchCriteria.propertyType
-        ) {
-          return false;
-        }
-
-        // Add similar checks for other criteria
-
         return true;
       });
 
       if (matchingProperties.length === 0) {
         setError("No matching properties found.");
       } else {
-        setError(null); // Clear any previous error if matching properties were found.
+        setError(null);
       }
-
-      console.log("Matching Properties:", matchingProperties);
-
       return matchingProperties;
     } catch (error) {
-      console.log("Error performing search:", error);
       return [];
     }
   };
@@ -123,6 +114,10 @@ const FindProperty = () => {
     return array;
   }
 
+  const handleBuyNow = (houseName) => {
+    window.alert(`Thank you for buying ${houseName}!`);
+  };
+
   return (
     <>
       <Navbar />
@@ -132,35 +127,20 @@ const FindProperty = () => {
 
       {/* search bar */}
       <div
-        className="container  flex-col z-20 mx-auto w-3/5 px-4 py-8 mt-[-30px] bg-textwhite rounded-lg shadow-xl"
+        className="container flex-col z-20 mx-auto w-2/6 px-4  mt-[-30px] bg-textwhite rounded-lg shadow-xl"
         style={{ position: "relative" }}
       >
         <div className="flex justify-between items-center ">
-          <div className="mb-4">
-            <label htmlFor="propertyType" className="block mb-1">
-              Property Type:
-            </label>
-            <select
-              id="propertyType"
-              value={propertyType}
-              onChange={(e) => setPropertyType(e.target.value)}
-              className="border border-gray-300 px-2 py-1 rounded"
-            >
-              <option value="">Any</option>
-              <option value="residential">Residential</option>
-              <option value="pg/co-liing">PG/Co-living</option>
-              <option value="commercial">Commercial</option>
-            </select>
-          </div>
           <input
             type="text"
             id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="border border-gray-300 px-2 py-1 rounded w-2/4"
+            className="border border-gray-300 px-2 py-1 rounded w-3/4 "
+            placeholder="Enter the Location e.g Jaipur"
           />
           <button
-            className="bg-orange  text-[#fff] font-bold py-2 px-4 rounded-lg mx-auto"
+            className="bg-orange text-[#fff] font-bold py-2 px-4 my-2 rounded-lg mx-auto"
             onClick={handleSearch}
           >
             Search
@@ -197,7 +177,10 @@ const FindProperty = () => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center">
+      <div
+        id="houseCardSection"
+        className="flex flex-col items-center justify-center"
+      >
         <h1 className="text-4xl text-center p-4 font-extrabold max-w-xl">
           Find Better Places to Live, Work and Wonder...
         </h1>
@@ -250,6 +233,7 @@ const FindProperty = () => {
                             className="bg-orange text-[#fff] font-bold py-2 px-4 rounded-lg mx-auto"
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => handleBuyNow(property.housename)}
                           >
                             Buy now
                           </button>
@@ -430,7 +414,6 @@ const FindProperty = () => {
             }}
           >
             <p className="text-base text-left p-2 font-bold uppercase text-[#626a78]">
-              {" "}
               LEASE FOR COMMERCIAL USE
             </p>
             <h1 className="text-4xl text-left font-black leading-10 p-2">

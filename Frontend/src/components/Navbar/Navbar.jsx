@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { currentUser, logout } = useAuth();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
-  
 
   return (
     <header className="bg-[#FFFAE9] w-full">
@@ -54,13 +54,20 @@ const Navbar = () => {
           </NavLink>
         </ul>
         <div className="md:flex md:items-center hidden space-x-4">
-          <NavLink to="/login">
+          {currentUser ? (
             <button
+              onClick={logout}
               className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500"
             >
-              Login
+              Logout
             </button>
-          </NavLink>
+          ) : (
+            <NavLink to="/login">
+              <button className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500">
+                Login
+              </button>
+            </NavLink>
+          )}
         </div>
         {/* Sidebar Hamburger Menu */}
         <div className="md:hidden">
@@ -109,9 +116,7 @@ const Navbar = () => {
 
               <NavLink to="/login">
                 <li>
-                  <button
-                    className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500 my-2 mx-2"
-                  >
+                  <button className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500 my-2 mx-2">
                     Login
                   </button>
                 </li>

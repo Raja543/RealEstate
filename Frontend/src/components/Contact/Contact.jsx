@@ -23,7 +23,6 @@ const Contact = () => {
   });
 
   useEffect(() => {
-    console.log("query", query);
     if (query.get("Subject")) {
       setSubject(query.get("Subject"));
     }
