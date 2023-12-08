@@ -1,8 +1,8 @@
 import React from "react";
-import Contact from "../components/Contact/Contact";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import Testimonial from "../components/TestimonialSection/Testimonial";
+import Contact from "../components/Contact";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Testimonial from "../components/Testimonial";
 
 const ContactHome = () => {
   return (

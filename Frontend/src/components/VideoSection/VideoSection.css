@@ -7,14 +7,14 @@
 
 .video-container {
     width: 100%;
-    max-width: 800px; /* Set a maximum width for the video container */
+    max-width: 800px; 
     margin-top: 1rem;
   }
   
   .aspect-w-16 {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* Set the padding bottom based on the desired aspect ratio (9/16 = 56.25%) */
+    padding-bottom: 56.25%; 
   }
   
   .aspect-h-9 {

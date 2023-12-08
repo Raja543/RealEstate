@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, get } from "firebase/database";
-import Footer from "../components/Footer/Footer";
-import Navbar from "../components/Navbar/Navbar";
-import CarouselBanner from "../components/CarouselBanner/CarouselBanner";
-import { AreaChart, Building2, MapPin } from "lucide-react";
-import { IndianRupee } from "lucide-react";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import CarouselBanner from "../components/CarouselBanner";
+import PropertyCard from "../components/PropertCard";
 
 const FindProperty = () => {
   const [location, setLocation] = useState("");
@@ -114,9 +113,7 @@ const FindProperty = () => {
     return array;
   }
 
-  const handleBuyNow = (houseName) => {
-    window.alert(`Thank you for buying ${houseName}!`);
-  };
+ 
 
   return (
     <>
@@ -197,93 +194,16 @@ const FindProperty = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mx-40 my-10">
               {matchingProperties.length === 0
                 ? displayProperties.map((property) => (
-                    <div
-                      key={property.id}
-                      className="bg-white shadow-xl rounded-lg overflow-hidden cursor-pointer"
-                    >
-                      <div
-                        className="bg-cover bg-center h-56 p-4"
-                        style={{
-                          backgroundImage:
-                            "url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)",
-                        }}
-                      ></div>
-                      <div className="p-4">
-                        <p className="capitalize text-left text-2xl font-extrabold py-2">
-                          {property.housename}
-                        </p>
-                        <div className="flex flex-row items-center justify-between">
-                          <div className="text-lg flex flex-row">
-                            <IndianRupee /> {property.price}
-                          </div>
-                          <div className="text-lg flex flex-row">
-                            <AreaChart /> {property.area} sqft
-                          </div>
-                        </div>
-                        <div className="flex flex-row items-center justify-between my-2">
-                          <div className="text-lg flex flex-row">
-                            <MapPin /> {property.location}
-                          </div>
-                          <div className="text-lg flex flex-row">
-                            <Building2 /> {property.propertyType}
-                          </div>
-                        </div>
-                        <div>
-                          <button
-                            className="bg-orange text-[#fff] font-bold py-2 px-4 rounded-lg mx-auto"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={() => handleBuyNow(property.housename)}
-                          >
-                            Buy now
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                  <PropertyCard
+                  key={property.id}
+                  property={{ ...property, area: property.area.toString() }}
+                />
                   ))
                 : matchingProperties.map((property) => (
-                    <div
-                      key={property.id}
-                      className="bg-white shadow-xl rounded-lg overflow-hidden cursor-pointer"
-                    >
-                      <div
-                        className="bg-cover bg-center h-56 p-4"
-                        style={{
-                          backgroundImage:
-                            "url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)",
-                        }}
-                      ></div>
-                      <div className="p-4">
-                        <p className="capitalize text-left text-2xl font-extrabold py-2">
-                          {property.housename}
-                        </p>
-                        <div className="flex flex-row items-center justify-between">
-                          <div className="text-lg flex flex-row">
-                            <IndianRupee /> {property.price}
-                          </div>
-                          <div className="text-lg flex flex-row">
-                            <AreaChart /> {property.area} sqft
-                          </div>
-                        </div>
-                        <div className="flex flex-row items-center justify-between my-2">
-                          <div className="text-lg flex flex-row">
-                            <MapPin /> {property.location}
-                          </div>
-                          <div className="text-lg flex flex-row">
-                            <Building2 /> {property.propertyType}
-                          </div>
-                        </div>
-                        <div>
-                          <button
-                            className="bg-orange text-[#fff] font-bold py-2 px-4 rounded-lg mx-auto"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Buy now
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                  <PropertyCard
+                  key={property.id}
+                  property={{ ...property, area: property.area.toString() }}
+                />
                   ))}
             </div>
           )}

@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./AuthContext";
 import Home from "./pages/Home";
 import ContactHome from "./pages/ContactHome";
-import Login from "./components/Login/Login";
-import Signup from "./components/Login/Signup";
+import Login from "./components/Authentication/Login";
+import Signup from "./components/Authentication/Signup";
 import FindProperty from "./pages/FindProperty";
 import Agent from "./pages/Agent";
 import PropertyList from "./pages/PropertyList";
-import Error404 from "./components/Error404/Error404";
+import Error404 from "./components/Error404";
 import PrivateRoute from "./PrivateRoute";
 
 function App() {

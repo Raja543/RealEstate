@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import emailjs from "emailjs-com";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../Firebase";
+import { db } from "../Firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { HashLink } from "react-router-hash-link";

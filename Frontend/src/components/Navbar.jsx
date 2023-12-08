@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../../AuthContext";
+import { useAuth } from "../AuthContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Navbar/Button";
+import Button from "./Button";
 const Hero = () => {
   return (
     <div className="bg-[#FFFAE9] p-4">

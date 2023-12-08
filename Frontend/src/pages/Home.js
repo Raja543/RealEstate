@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import Hero from "../components/HeroSection/Hero";
-import CountDown from "../components/CountDownSection/CountDown";
-import About from "../components/AboutSection/About";
-import CtaSection from "../components/CtaSection/CtaSection";
-import Testimonial from "../components/TestimonialSection/Testimonial";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import CountDown from "../components/CountDown";
+import About from "../components/About";
+import CtaSection from "../components/CtaSection";
+import Testimonial from "../components/Testimonial";
 import VideoSection from "../components/VideoSection/VideoSection";
 
 function Home() {

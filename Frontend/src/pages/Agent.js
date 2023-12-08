@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AgentsProfile from "../components/AgentProfile/AgentProfile";
+import AgentsProfile from "../components/AgentProfile";
 import { getDatabase, ref, onValue } from "firebase/database";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Agent = () => {
   const [agentIds, setAgentIds] = useState([]);
