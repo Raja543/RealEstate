@@ -36,7 +36,6 @@ Whether you're a property owner or a real estate agent, easily list properties o
 
 For property management, Dwelling provides an intuitive admin panel. This powerful tool allows efficient property listing, deletion, and overall management. The admin panel is designed with features such as mobile responsiveness, contact forms, Firebase authentication, email notifications, testimonials, and advanced property search with filters.
 
-
 ## Project Setup Tutorial
 
 ### Prerequisites
@@ -125,24 +124,26 @@ Replace the placeholder with your actual Firebase configuration.
 ```bash
 npm start
 ```
-Visit http://localhost:3000 to see your Dwelling Real Estate Platform in action!
 
+Visit http://localhost:3000 to see your Dwelling Real Estate Platform in action!
 
 ## Getting Started
 
-1. **Client-Side Login**:
+1. **Client-Side **:
 
-   - [Client Login](https://dwelling.vercel.app) - Usertest@gmail.com / pass: test@12345
+- [Client Website](https://dwelling.vercel.app)
+- [Client Login] :- Usertest@gmail.com / pass: test@12345
 
-2. **Admin-Side Login**:
+2. **Admin-Side **:
 
-   - [Admin Login](https://dwelling-admin.vercel.app) - Admintest@gmail.com / pass: admin@12345
+   - [Admin Website](https://dwelling-admin.vercel.app)
+   - [Admin login] :- Admintest@gmail.com / pass: admin@12345
 
 3. **Explore Properties**: Utilize our advanced search and filter options to discover the perfect property.
 4. **Contact and Communicate**: Use contact forms to inquire about properties or engage with other users.
 5. **Stay Informed**: Receive email notifications to stay updated on transactions, inquiries, and more.
 6. **Admin Panel Access**: If you're a property manager or administrator, access the intuitive admin panel to efficiently manage listings and user interactions.
 
-
 ## Contact Us
+
 For any questions, assistance, or feedback, please contact at rajakumarmahto952@gmail.com
