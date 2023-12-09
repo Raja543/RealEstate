@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getDatabase, ref, onValue } from "firebase/database";
-import { Phone } from "lucide-react";
-import { Mail } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 
 const AgentProfile = ({ agentId }) => {
   const [agent, setAgent] = useState(null);
@@ -35,7 +34,7 @@ const AgentProfile = ({ agentId }) => {
   }
 
   return (
-    <div className="max-w-sm bg-[#FFFAE9] shadow-2xl rounded-2xl text-gray-900 items-center justify-center mx-auto p-8 ">
+    <div className="max-w-[350px] bg-[#FFFAE9] shadow-2xl rounded-2xl mx-auto items-center justify-center  p-4 lg:p-8 m-4">
       <div className="rounded-t-lg h-32 overflow-hidden">
         <img
           className="object-cover object-top w-full"
@@ -51,11 +50,11 @@ const AgentProfile = ({ agentId }) => {
         <p className="text-[gray]">{agent.designation}</p>
       </div>
       <div className="flex flex-col">
-        <div className=" p-2 flex flex-row">
+        <div className="p-1 flex flex-row">
           <Phone size={28} />
           <span className="font-medium text-lg pl-4">{agent.phone}</span>
         </div>
-        <div className="p-2 flex flex-row">
+        <div className="p- flex flex-row">
           <Mail size={28} />
           <span className="font-medium text-lg pl-4">{agent.email}</span>
         </div>

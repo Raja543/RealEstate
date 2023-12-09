@@ -95,32 +95,38 @@ const Navbar = () => {
                   Home
                 </li>
               </NavLink>
+              <NavLink to="/findproperty">
+                <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
+                  Find Property
+                </li>
+              </NavLink>
+              <NavLink to="/listproperty">
+                <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
+                  List Property
+                </li>
+              </NavLink>
               <NavLink to="/agents">
                 <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
                   Agents
                 </li>
               </NavLink>
-              <NavLink to="/contact">
+              <NavLink to="/contacts">
                 <li className="p-2 text-xl">Contact Us</li>
               </NavLink>
-              <NavLink to="/property-search">
-                <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
-                  Find Property
-                </li>
-              </NavLink>
-              <NavLink to="/Property-list">
-                <li className="text-gray-800 text-xl hover:text-gray-500 p-2">
-                  List Property
-                </li>
-              </NavLink>
-
-              <NavLink to="/login">
-                <li>
-                  <button className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500 my-2 mx-2">
+              {currentUser ? (
+                <button
+                  onClick={logout}
+                  className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500"
+                >
+                  Logout
+                </button>
+              ) : (
+                <NavLink to="/login">
+                  <button className="bg-orange max-w-fit text-textwhite font-[Albert-sans] py-2 px-6 rounded-md duration-500">
                     Login
                   </button>
-                </li>
-              </NavLink>
+                </NavLink>
+              )}
             </ul>
             {/* Close (X) icon inside the Sidebar Menu */}
             <button

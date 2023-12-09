@@ -37,8 +37,8 @@ const PropertyList = () => {
   return (
     <>
       <Navbar />
-      <div className="flex bg-[#f7eed2] flex-row min-h-screen ">
-        <div className="w-80 bg-[#f7eed2] text-[#1a237e] overflow-hidden text-base opacity-90  sticky top-0 left-0 h-[90vh]  ">
+      <div className="flex bg-[#f7eed2] flex-col lg:flex-row min-h-screen ">
+        <div className="w-full lg:w-80 bg-[#f7eed2] text-[#1a237e] overflow-hidden text-base opacity-90 lg:sticky lg:top-0 lg:left-0 lg:h-[90vh]  ">
           <h1 className="text-2xl font-bold text-center pt-6  ">
             Submit Your Listing
           </h1>
@@ -48,8 +48,8 @@ const PropertyList = () => {
           </p>
           <AddPropertyForm onAddProperty={handleAddProperty} />
         </div>
-        <div className=" bg-[#FFFAE9] overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-12 ml-4">
-          <h1 className="text-4xl font-bold text-center col-span-3 mt-4">
+        <div className=" bg-[#FFFAE9] lg:overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-12 lg:ml-4">
+          <h1 className="text-4xl font-bold text-center lg:col-span-3 mt-4">
             Listed Properties
           </h1>
           {properties.map((property) =>

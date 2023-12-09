@@ -6,10 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../Firebase";
+import { Eye, EyeOff } from "lucide-react";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
   const [name, setName] = useState("");
   const [errors, setErrors] = useState({
     name: "",
@@ -42,7 +44,7 @@ const Signup = () => {
     if (hasError) {
       setErrors(updatedErrors);
     } else {
-      setErrors({}); // Clear any existing errors
+      setErrors({});
 
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
@@ -50,8 +52,6 @@ const Signup = () => {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1000,
           });
-
-          // Redirect the user to the desired page after signup
           navigate("/login");
         })
         .catch(() => {
@@ -60,12 +60,18 @@ const Signup = () => {
     }
   };
 
+  const handleClick = () => {
+    setPasswordType((prevType) =>
+      prevType === "password" ? "text" : "password"
+    );
+  };
+
   const handleSignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
         localStorage.setItem("email", user.email);
-        navigate("/home"); // Redirect to the home page or desired destination
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
@@ -74,7 +80,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className="flex items-center min-h-screen px-60 py-20 bg-gray-100 lg:justify-center">
+      <div className="flex items-center min-h-screen px-4 py-4 lg:px-60 lg:py-20 bg-gray-100 lg:justify-center">
         <div className="flex flex-col overflow-hidden bg-[#fff] rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md  shadow-custom">
           <div className="p-4 py-6 text-[#000] bg-[#FFFAE9] md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
             <div className="my-3 text-4xl font-bold tracking-wider text-center">
@@ -92,7 +98,7 @@ const Signup = () => {
               Building a next-generation collaborative platform to connect
               renters, homeowners, and agents.
             </p>
-            <p className="flex flex-col items-center justify-center mt-10 text-center">
+            <p className="flex flex-col items-center justify-center mt-4 lg:mt-10 text-center">
               <span>Already have an account?</span>
               <Link to="/login" className="underline">
                 Log in
@@ -152,18 +158,30 @@ const Signup = () => {
                 <label htmlFor="password" className="text-sm font-semibold">
                   Password
                 </label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  placeholder="Enter your password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
-                  required
-                />
-                {errors.password && (
-                  <span className="text-orange">{errors.password}</span>
-                )}
+                <div className="relative">
+                  <input
+                    type={passwordType}
+                    id="password"
+                    value={password}
+                    placeholder="Enter your password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-4 py-2 transition duration-300 border rounded focus:border-none focus:outline-none focus:ring-4 focus:ring-blue-200"
+                    required
+                  />
+                  {errors.password && (
+                    <span className="text-orange">{errors.password}</span>
+                  )}
+                  <div
+                    className="absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                    onClick={handleClick}
+                  >
+                    {passwordType === "password" ? (
+                      <Eye className="text-[#718096] hover:text-[#2d3748] mx-2" />
+                    ) : (
+                      <EyeOff className="text-[#718096] hover:text-[#2d3748] mx-2" />
+                    )}
+                  </div>
+                </div>
               </div>
               <div>
                 <button

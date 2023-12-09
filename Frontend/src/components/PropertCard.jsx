@@ -54,14 +54,14 @@ const PropertyCard = ({ property }) => {
 };
 
 PropertyCard.propTypes = {
-    property: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      housename: PropTypes.string,
-      price: PropTypes.number.isRequired,
-      area: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
-      propertyType: PropTypes.string.isRequired,
-    }).isRequired,
-  };
+  property: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    housename: PropTypes.string,
+    price: PropTypes.number,
+    area: PropTypes.number,
+    location: PropTypes.string.isRequired,
+    propertyType: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default PropertyCard;

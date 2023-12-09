@@ -113,8 +113,6 @@ const FindProperty = () => {
     return array;
   }
 
- 
-
   return (
     <>
       <Navbar />
@@ -124,7 +122,7 @@ const FindProperty = () => {
 
       {/* search bar */}
       <div
-        className="container flex-col z-20 mx-auto w-2/6 px-4  mt-[-30px] bg-textwhite rounded-lg shadow-xl"
+        className="container hidden lg:block flex-col z-20 mx-auto w-2/6 px-4  mt-[-30px] bg-textwhite rounded-lg shadow-xl"
         style={{ position: "relative" }}
       >
         <div className="flex justify-between items-center ">
@@ -146,11 +144,11 @@ const FindProperty = () => {
       </div>
 
       {/* display type of property */}
-      <div className="px-10  my-4 ">
-        <h1 className="text-2xl text-center p-2">
+      <div className="lg:px-10 my-4 ">
+        <h1 className="text-lg md:text-2xl text-center p-2">
           Get Started with real estate options
         </h1>
-        <div className="flex flex-row items-center justify-center">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center px-14 sm:px-0">
           <div className="flex flex-col mx-6 my-4">
             <img src="/images/d1.webp" alt="display1"></img>
             <p className="text-sm text-center p-4">Buying a home</p>
@@ -167,7 +165,7 @@ const FindProperty = () => {
             <img src="/images/d4.webp" alt="display1"></img>
             <p className="text-sm text-center p-4">PG and co-living</p>
           </div>
-          <div className="flex flex-col  mx-6 my-4">
+          <div className="flex flex-col mx-6 my-4">
             <img src="/images/d5.webp" alt="display1"></img>
             <p className="text-sm text-center p-4">Buying commercial space</p>
           </div>
@@ -178,44 +176,38 @@ const FindProperty = () => {
         id="houseCardSection"
         className="flex flex-col items-center justify-center"
       >
-        <h1 className="text-4xl text-center p-4 font-extrabold max-w-xl">
+        <h1 className="text-2xl lg:text-4xl text-center p-4 font-extrabold max-w-xl">
           Find Better Places to Live, Work and Wonder...
         </h1>
       </div>
 
       {/* display house card */}
       <div>
-        <div className="mt-8">
+        <div className="lg:mt-8 ">
           {loading ? (
             <p>Loading...</p>
           ) : error ? (
             <p>{error}</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mx-40 my-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mx-8 my-4 lg:mx-40 lg:my-10">
               {matchingProperties.length === 0
                 ? displayProperties.map((property) => (
-                  <PropertyCard
-                  key={property.id}
-                  property={{ ...property, area: property.area.toString() }}
-                />
+                    <PropertyCard key={property.id} property={property} />
                   ))
                 : matchingProperties.map((property) => (
-                  <PropertyCard
-                  key={property.id}
-                  property={{ ...property, area: property.area.toString() }}
-                />
+                    <PropertyCard key={property.id} property={property} />
                   ))}
             </div>
           )}
         </div>
       </div>
 
-      <div className="mx-40 my-10">
-        <h1 className="text-4xl px-4 py-8 font-extrabold ">
+      <div className="mx-8 my-4 lg:mx-40 lg:my-10">
+        <h1 className="text-2xl lg:text-4xl px-4 py-4 lg:py-8 font-extrabold text-center ">
           Explore the best properties in your city
         </h1>
-        <div className="grid grid-cols-4 items-center">
-          <div className="flex flex-row  my-4">
+        <div className="grid lg:grid-cols-4 items-center ">
+          <div className="flex flex-row my-4">
             <img
               width={100}
               height={98}
@@ -296,54 +288,54 @@ const FindProperty = () => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center m-16">
-        <h1 className="text-4xl text-center font-black p-4  max-w-2xl">
+      <div className="flex flex-col items-center justify-center lg:m-16">
+        <h1 className="text-2xl lg:text-4xl text-center font-black p-4 w-full lg:max-w-2xl">
           Choose from a wide variety of commercial properties
         </h1>
-        <div className="flex flex-row items-center justify-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center mx-6">
           <div
-            className="flex flex-col mx-6 my-4 px-16 py-20 bg-[#e5e3e3] relative bg-opacity-60 bg-repeat bg-cover bg-center"
+            className="flex flex-col mx-6 my-4 px-8 sm:px-16 py-12 sm:py-20 bg-[#e5e3e3] relative bg-opacity-60 bg-repeat bg-cover bg-center"
             style={{
               backgroundImage: "url('/images/bgc1.webp')",
-              width: "512px",
+              width: "100%",
               height: "450px",
               backgroundBlendMode: "overlay",
             }}
           >
-            <p className="text-base text-left p-2 font-bold uppercase text-[#626a78]">
+            <p className="text-base sm:text-left p-2 font-bold uppercase text-[#626a78]">
               Buy For commercial use
             </p>
-            <h1 className="text-4xl text-left font-black leading-10 p-2">
+            <h1 className="text-2xl sm:text-4xl text-left font-black leading-10 p-2">
               Buy a commercial property
             </h1>
             <p className="text-base text-left p-2 font-bold">
               Explore from Office Spaces, Co-working spaces, Retail Shops, Land,
               Factories and more
             </p>
-            <button className="max-w-fit  px-4 py-2 text-lg mt-4 font-semibold text-white transition-colors duration-300 bg-[#e16b35] text-[#fff] rounded-md shadow hover:bg-[#ff6d2a]">
+            <button className="max-w-fit px-4 py-2 text-base lg:text-lg mt-4 font-semibold text-white transition-colors duration-300 bg-[#e16b35] text-[#fff] rounded-md shadow hover:bg-[#ff6d2a]">
               Explore Buying Commercial
             </button>
           </div>
           <div
-            className="flex flex-col mx-6 my-4 px-16 py-20 bg-[#e5e3e3] relative bg-opacity-60 bg-repeat bg-cover bg-center"
+            className="flex flex-col mx-6 my-4 px-8 sm:px-16 py-12 sm:py-20 bg-[#e5e3e3] relative bg-opacity-60 bg-repeat bg-cover bg-center"
             style={{
               backgroundImage: "url('/images/bgc2.webp')",
-              width: "512px",
+              width: "100%", // Set width to 100% for responsiveness
               height: "450px",
               backgroundBlendMode: "overlay",
             }}
           >
-            <p className="text-base text-left p-2 font-bold uppercase text-[#626a78]">
+            <p className="text-base sm:text-left p-2 font-bold uppercase text-[#626a78]">
               LEASE FOR COMMERCIAL USE
             </p>
-            <h1 className="text-4xl text-left font-black leading-10 p-2">
+            <h1 className="text-2xl lg:text-4xl text-left font-black leading-10 p-2">
               Lease a Commercial property
             </h1>
             <p className="text-base text-left p-2 font-bold">
               Explore from Office Spaces, Co-working spaces, Retail Shops, Land,
               Factories and more
             </p>
-            <button className="max-w-fit  px-4 py-2 text-lg mt-4 font-semibold text-white transition-colors duration-300 bg-[#e16b35] text-[#fff] rounded-md shadow hover:bg-[#ff6d2a]">
+            <button className="max-w-fit px-4 py-2 text-base lg:text-lg mt-4 font-semibold text-white transition-colors duration-300 bg-[#e16b35] text-[#fff] rounded-md shadow hover:bg-[#ff6d2a]">
               Explore Leasing Commercial
             </button>
           </div>
