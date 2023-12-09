@@ -131,12 +131,12 @@ Visit http://localhost:3000 to see your Dwelling Real Estate Platform in action!
 
 1. **Client-Side **:
 
-- [Client Website](https://dwelling.vercel.app)
+- [Client Website](https://dwelling-raja.vercel.app/)
 - [Client Login] :- Usertest@gmail.com / pass: test@12345
 
 2. **Admin-Side **:
 
-   - [Admin Website](https://dwelling-admin.vercel.app)
+   - [Admin Website](https://dwelling-raja-admin.vercel.app)
    - [Admin login] :- Admintest@gmail.com / pass: admin@12345
 
 3. **Explore Properties**: Utilize our advanced search and filter options to discover the perfect property.
